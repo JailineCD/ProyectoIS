@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Lista de Empleados</title>
+    <style>
+        .ui-datatable th, .ui-datatable td {
+            padding: 1px 1px; /* Reducir el espaciado dentro de las celdas */
+            height: 1px; /* Ajustar la altura de las celdas */
+            font-size: 12px; /* Ajustar el tamaño de la letra */
+        }
+        .ui-datatable .col-id {
+            width: 1px; /* Ajustar el ancho de la columna ID */
+        }
+        .ui-datatable .col-clave {
+            width: 20px; /* Ajustar el ancho de la columna CLAVE */
+        }
+        .ui-datatable .col-anotaciones {
+            width: 200px; /* Ajustar el ancho de la columna Cuadro de Anotaciones */
+        }
+        .ui-datatable .col-descripcion {
+            width: 100px; /* Ajustar el ancho de la columna DESCRIPCIÓN */
+        }
+        .ui-datatable .col-idantecedentes {
+            width: 10px; /* Ajustar el ancho de la columna ID */
+        }
+        .ui-datatable .col-seleccion {
+            width: 50px; /* Ajustar el ancho de la columna SELECCIÓN */
+        }
+       .ui-datatable .col-seleccionar {
+            width: 100px; /* Ajustar el ancho de la columna SELECCIÓN */
+        }
+
+        .table-container {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%; /* Ajustar el ancho de las tablas para que queden a la par */
+            margin-right: 2%; /* Espacio entre las tablas */
+        }
+        .titulo {
+            font-size: 10px; /* Tamaño de la letra para los títulos */
+            font-weight: bold; /* Negrita para los títulos */
+        }
+        .button-container {
+            margin-top: 10px; /* Espacio entre la tabla y el botón */
+        }
+
+    </style>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <h2 class="titulo">Lista de Empleados</h2>
+        <p:selectOneMenu value="#{inicioEmpleado.selectedCue}">
+            <f:selectItem itemLabel="Seleccione un CUE" itemValue="" />
+            <f:selectItems value="#{inicioEmpleado.listaCues}" var="cue" 
+                           itemLabel="#{cue}" itemValue="#{cue}" />
+            <p:ajax event="change" listener="#{inicioEmpleado.seleccionarEmpleado}" update="@form" />
+        </p:selectOneMenu>
+
+        <p:commandButton value="Buscar" action="#{inicioEmpleado.seleccionarEmpleado}" update="@form" />
+
+        <p:dataTable var="empleado" value="#{inicioEmpleado.selectedEmpleado}" rendered="#{not empty inicioEmpleado.selectedEmpleado}">
+            <p:column headerText="DPI">
+                <h:outputText value="#{empleado.dpi}" />
+            </p:column>
+            <p:column headerText="CUE">
+                <h:outputText value="#{empleado.cue}" />
+            </p:column>
+            <p:column headerText="Primer Nombre">
+                <h:outputText value="#{empleado.nombre1}" />
+            </p:column>
+            <p:column headerText="Segundo Nombre">
+                <h:outputText value="#{empleado.nombre2}" />
+            </p:column>
+            <p:column headerText="Primer Apellido">
+                <h:outputText value="#{empleado.apellido1}" />
+            </p:column>
+            <p:column headerText="Segundo Apellido">
+                <h:outputText value="#{empleado.apellido2}" />
+            </p:column>
+            <p:column headerText="Apellido de Casada">
+                <h:outputText value="#{empleado.apellidoc}" />
+            </p:column>
+            <p:column headerText="Fecha Desde">
+                <h:outputText value="#{empleado.fechaDesde}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Fecha Hasta">
+                <h:outputText value="#{empleado.fechaHasta}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Estado">
+                <h:outputText value="#{empleado.estado}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
