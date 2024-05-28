@@ -18,9 +18,11 @@
         <mapping class="umg.edu.gt.DTO.SignoVitalDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoAntecedenteClinicoDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoAparatoSistemasDTO"/>
+        <mapping class="umg.edu.gt.DTO.TipoExamenDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoExamenFisicoDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoExamenLaboratorioDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoSignoVitalDTO"/>
+        
         
         
         
