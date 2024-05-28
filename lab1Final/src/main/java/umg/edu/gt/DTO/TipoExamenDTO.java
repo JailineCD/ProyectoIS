@@ -5,6 +5,7 @@
 package umg.edu.gt.DTO;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.*;
  * @author Douglas
  */
 @Entity
-@Table(name = "signo_vital")
+@Table(name = "tipo_examen")
 public class TipoExamenDTO implements Serializable {
     
     @Id
