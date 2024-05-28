@@ -28,8 +28,12 @@
             <p:outputLabel for="fecha" value="Fecha:"/>
             <p:calendar id="fecha" value="#{pacienteDTO.paciente.fecha}" required="true" pattern="yyyy-MM-dd" showOn="button" label="Fecha"/>
 
-            <p:outputLabel for="cue" value="CUE:"/>
-            <p:inputText id="cue" value="#{pacienteDTO.paciente.cue}" required="true" label="CUE"/>
+             <p:selectOneMenu id="empleado" value="#{inicioEmpleado.selectedEmpleado}">
+                <f:selectItem itemLabel="Seleccione un empleado" itemValue="" />
+                <f:selectItems value="#{inicioEmpleado.listaEmpleados}" var="empleado"
+                               itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}"
+                               itemValue="#{empleado}" />
+            </p:selectOneMenu>
 
             <p:outputLabel for="id_tipo_examen" value="Tipo de Examen:"/>
             <p:inputText id="id_tipo_examen" value="#{pacienteDTO.paciente.id_tipo_examen}" required="true" label="Tipo de Examen"/>
