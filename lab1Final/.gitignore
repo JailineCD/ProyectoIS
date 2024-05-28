@@ -2,4 +2,4 @@
 *.class
 
 #Omitir archivo hibernate.cfg.xml
-/src/main/resources/hibernate.cfg.xml
+/hibernate.cfg.xml
