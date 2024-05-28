@@ -4,6 +4,7 @@
  */
 package umg.edu.gt.DTO;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +24,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "antecedente_clinico")
-public class AntecedenteClinicoDTO {
+public class AntecedenteClinicoDTO implements Serializable {
     
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_paciente")
     private PacienteDTO id_paciente;

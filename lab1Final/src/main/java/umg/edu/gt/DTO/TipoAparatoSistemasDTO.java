@@ -4,6 +4,7 @@
  */
 package umg.edu.gt.DTO;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "aparato_sistemas")
-public class TipoAparatoSistemasDTO {
+public class TipoAparatoSistemasDTO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

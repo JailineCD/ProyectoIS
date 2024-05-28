@@ -4,6 +4,7 @@
  */
 package umg.edu.gt.DTO;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "centro_costo")
-public class CentroCostoDTO {
+public class CentroCostoDTO implements Serializable {
     
     @Id
     @Column(name = "idcc")
@@ -23,4 +24,34 @@ public class CentroCostoDTO {
     
     @Column(name = "descripcion")
     private String descripcion;
+
+    /**
+     * @return the idcc
+     */
+    public Long getIdcc() {
+        return idcc;
+    }
+
+    /**
+     * @param idcc the idcc to set
+     */
+    public void setIdcc(Long idcc) {
+        this.idcc = idcc;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
 }

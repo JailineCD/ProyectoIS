@@ -8,6 +8,7 @@
     <title>Registro de Paciente</title>
     <h:outputStylesheet library="css" name="default.css"/>
     <h:outputStylesheet library="css" name="theme.css"/>
+     <link rel="icon" type="image/png" href="#{resource['images/examen.png']}" />
 </h:head>
 
 <h:body>
@@ -217,7 +218,7 @@
             </p:column>
         </p:dataTable>
 
-        <h1>Conclusiones</h1>
+        <h2>Conclusiones</h2>
         <p:panelGrid columns="6" styleClass="grid">
             <p:outputLabel for="recomendacion" value="Recomendación:"/>
             <p:inputTextarea id="recomendacion" value="#{pacienteDTO.paciente.recomendacion}" rows="3" cols="30"/>

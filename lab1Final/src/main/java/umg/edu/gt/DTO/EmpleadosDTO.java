@@ -1,11 +1,12 @@
 package umg.edu.gt.DTO;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "empleado")
-public class EmpleadosDTO {
+public class EmpleadosDTO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
