@@ -1,4 +1,7 @@
 @CHARSET "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;1,300&amp;display=swap');
+
 @media screen and (max-width:560px){
     .ui-grid-responsive .ui-grid-row{
         display:block;
@@ -374,4 +377,40 @@ div.textoBlancoFondoAqua>ul.ui-menu-list>li.ui-menuitem>a.ui-menuitem-link>span.
 .ui-fieldset-legend {
     padding: 0.1em 1em 0.1em 1em !important;
     cursor: help !important;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-button-text {
+            background-color: green;
+        }
+               
+
+.contenedor_titulo {
+    width: 100%;
+    text-align: center;
+}
+
+.titulo_principal {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 300;
+    font-size: 1rem;
+    font-style: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .titulo_principal h2 {
+    margin: 0;
+}
+
+.logo {
+    height: 180px; /* Ajusta la altura según tus necesidades */
+    width: 180px; /* Ajusta el ancho según tus necesidades */
+    position: absolute;
+    top: 60px;
+    right: 125px;
+}
+
+body {
+    font-size: 0.01rem;
 }

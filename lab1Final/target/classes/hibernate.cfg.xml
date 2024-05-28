@@ -1,13 +1,28 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3308/clinica</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clinica</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
-        <mapping class="umg.ed.gt.DTO.EmpleadosDTO"/>
+        <mapping class="umg.edu.gt.DTO.AntecedenteClinicoDTO"/>
+        <mapping class="umg.edu.gt.DTO.AparatoSistemasDTO"/>
+        <mapping class="umg.edu.gt.DTO.CentroCostoDTO"/>
+        <mapping class="umg.edu.gt.DTO.EmpleadosDTO"/>
+        <mapping class="umg.edu.gt.DTO.ExamenFisicoDTO"/>
+        <mapping class="umg.edu.gt.DTO.ExamenLaboratorioDTO"/>
+        <mapping class="umg.edu.gt.DTO.PacienteDTO"/>
+        <mapping class="umg.edu.gt.DTO.PuestoDTO"/>
+        <mapping class="umg.edu.gt.DTO.SignoVitalDTO"/>
+        <mapping class="umg.edu.gt.DTO.TipoAntecedenteClinicoDTO"/>
+        <mapping class="umg.edu.gt.DTO.TipoAparatoSistemasDTO"/>
+        <mapping class="umg.edu.gt.DTO.TipoExamenFisicoDTO"/>
+        <mapping class="umg.edu.gt.DTO.TipoExamenLaboratorioDTO"/>
+        <mapping class="umg.edu.gt.DTO.SignoVitalDTO"/>
+        
+        
         
         
         

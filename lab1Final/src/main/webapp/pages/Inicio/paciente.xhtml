@@ -7,13 +7,23 @@
 <h:head>
     <title>Registro de Paciente</title>
     <h:outputStylesheet library="css" name="default.css"/>
+    <h:outputStylesheet library="css" name="theme.css"/>
 </h:head>
 
 <h:body>
     <h:form id="pacienteForm">
         <p:messages id="messages" showDetail="true"/>
 
-        <h2>Registro de Paciente</h2>
+        <h:form>
+            <div class="contenedor_titulo">
+                <div class="titulo_principal">
+                    <h2>Registro de Paciente</h2>
+                    <p:graphicImage name="images/logo_PB.png" styleClass="logo"/>
+                    <h4>Gestión de citas médicas Pablo Blanco</h4>
+                </div>
+            </div>
+        </h:form>
+        
 
         <h:panelGrid columns="6" style="margin-bottom: 20px;">
             <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm"/>
@@ -208,7 +218,7 @@
         </p:dataTable>
 
         <h1>Conclusiones</h1>
-        <p:panelGrid columns="4" styleClass="grid">
+        <p:panelGrid columns="6" styleClass="grid">
             <p:outputLabel for="recomendacion" value="Recomendación:"/>
             <p:inputTextarea id="recomendacion" value="#{pacienteDTO.paciente.recomendacion}" rows="3" cols="30"/>
 
@@ -217,11 +227,16 @@
 
             <p:outputLabel for="fecha_vencimiento" value="Fecha de Vencimiento:"/>
             <p:calendar id="fecha_vencimiento" value="#{pacienteDTO.paciente.fecha_vencimiento}" pattern="yyyy-MM-dd" showOn="button"/>
+        
         </p:panelGrid>
+        
+        <div style="margin-top: 20px;">
+            <p:commandButton  value="Guardar" action="#{pacienteDTO.savePaciente}" update="pacienteForm" icon="pi pi-save"/>
+        </div>
+        
+        
 
-        <h:panelGroup style="margin-top:20px;">
-            <p:commandButton value="Guardar" action="#{pacienteDTO.savePaciente}" update="pacienteForm" icon="ui-icon-disk"/>
-        </h:panelGroup>
+        
     </h:form>
 </h:body>
 </html>

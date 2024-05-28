@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import umg.edu.gt.DAO.EmpleadosDAO;
-import umg.ed.gt.DTO.EmpleadosDTO;
+import umg.edu.gt.DTO.EmpleadosDTO;
 
 @ManagedBean(name = "inicioEmpleado")
 @ViewScoped

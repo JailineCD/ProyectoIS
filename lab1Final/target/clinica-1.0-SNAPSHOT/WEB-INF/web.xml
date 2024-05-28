@@ -24,6 +24,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/pages/Inicio/InicioUI.xhtml</welcome-file>
+        <welcome-file>faces/pages/Inicio/paciente.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

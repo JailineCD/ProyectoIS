@@ -4,7 +4,7 @@ import Util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import umg.ed.gt.DTO.EmpleadosDTO;
+import umg.edu.gt.DTO.EmpleadosDTO;
 
 public class EmpleadosDAO {
 
