@@ -1,2 +1,4 @@
 #Archivos de compilación
 *.class
+*.war
+*.jar
