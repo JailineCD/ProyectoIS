@@ -2,3 +2,6 @@
 *.class
 *.war
 *.jar
+
+# Ignorar archivos de configuración de Hibernate
+src/main/resources/hibernate.cfg.xml
