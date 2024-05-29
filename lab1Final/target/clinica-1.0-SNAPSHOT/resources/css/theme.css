@@ -410,3 +410,26 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
     top: 60px;
     right: 80px;
 }
+
+.contenedor_1 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px; /* Espaciado entre columnas */
+    flex: 1; /* Permite que cada columna ocupe el mismo ancho */
+    width: 20%;
+}
+
+.field label {
+    margin-bottom: 5px; /* Espaciado entre etiqueta y campo de entrada */
+    
+}
+
+.ui-calendar {
+    width: 100%;
+}

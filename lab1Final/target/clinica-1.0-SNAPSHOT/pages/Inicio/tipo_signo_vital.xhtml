@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Tipos de Signos Vitales</title>
+    </h:head>
+<h:body>
+    <h:form id="insertForm">
+        <p:panelGrid columns="2" styleClass="grid">
+            <p:outputLabel for="clave" value="Clave:" />
+            <p:inputText id="clave" value="#{bkn_TipoSignoVital.tipoSignoVital.clave}" required="true" />
+            
+            <p:outputLabel for="descripcion" value="Descripción:" />
+            <p:inputText id="descripcion" value="#{bkn_TipoSignoVital.tipoSignoVital.descripcion}" required="true" />
+            
+            <p:commandButton value="Insertar" action="#{bkn_TipoSignoVital.guardarSignoVital()}" update=":insertForm" />
+        </p:panelGrid>
+    </h:form>
+</h:body>
+</html>

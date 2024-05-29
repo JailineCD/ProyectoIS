@@ -1,243 +1,269 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
     <title>Registro de Paciente</title>
-    <h:outputStylesheet library="css" name="default.css"/>
-    <h:outputStylesheet library="css" name="theme.css"/>
-     <link rel="icon" type="image/png" href="#{resource['images/examen.png']}" />
+    <h:outputStylesheet library="css" name="default.css" />
+    <h:outputStylesheet library="css" name="theme.css" />
+    <link rel="icon" type="image/png" href="#{resource['images/examen.png']}" />
 </h:head>
 
 <h:body>
     <h:form id="pacienteForm">
-        <p:messages id="messages" showDetail="true"/>
+        <p:messages id="messages" showDetail="true" />
 
         <h:form>
             <div class="contenedor_titulo">
                 <div class="titulo_principal">
                     <h2>Registro de Paciente</h2>
-                    <p:graphicImage name="images/logo_PB.png" styleClass="logo"/>
+                    <p:graphicImage name="images/logo_PB.png" styleClass="logo" />
                     <h3>Gestión de Exámenes Médicos</h3>
                 </div>
             </div>
         </h:form>
-        
+
 
         <h:panelGrid columns="6" style="margin-bottom: 20px;">
-            <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm"/>
-            <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm"/>
-            <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm"/>
-            <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm"/>
-            <p:commandButton value="Filtro" icon="pi pi-filter" update=":pacienteForm"/>
-            <p:commandButton value="Ver Reporte" icon="pi pi-chart-bar" update=":pacienteForm"/>
+            <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm" />
+            <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm" oncomplete="PF('reporteDialog').show();" />
+            <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm" />
+            <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" />
+            <p:commandButton value="Filtro" icon="pi pi-filter" update=":pacienteForm" />
+            <p:commandButton value="Ver Reporte" icon="pi pi-chart-bar" update=":pacienteForm" />
         </h:panelGrid>
-
-        <p:panelGrid columns="6" styleClass="grid">
-            <p:outputLabel for="fecha" value="Fecha:"/>
-            <p:calendar id="fecha" value="#{pacienteDTO.paciente.fecha}" required="true" pattern="yyyy-MM-dd" showOn="button" label="Fecha"/>
-
-             <p:selectOneMenu id="empleado" value="#{inicioEmpleado.selectedEmpleado}">
-                <f:selectItem itemLabel="Seleccione un empleado" itemValue="" />
-                <f:selectItems value="#{inicioEmpleado.listaEmpleados}" var="empleado"
-                               itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}"
-                               itemValue="#{empleado}" />
-            </p:selectOneMenu>
-
-            <p:outputLabel for="id_tipo_examen" value="Tipo de Examen:"/>
-            <p:inputText id="id_tipo_examen" value="#{pacienteDTO.paciente.id_tipo_examen}" required="true" label="Tipo de Examen"/>
-        </p:panelGrid>
+        
+          <p:dialog id="reporteDialog" header="Signos Vitales" widgetVar="reporteDialog" modal="true" width="60%">
+                    <iframe id="reporteFrame" width="100%" height="500px" 
+                            src="pages/Inicio/tipo_signo_vital.xhtml" frameborder="0"></iframe>
+                </p:dialog>
+            
+        
+        <h:panelGroup layout="block" styleClass="contenedor_1">
+    <div class="field">
+        <p:outputLabel for="fecha" value="Fecha:" />
+        <p:calendar id="fecha" value="#{pacienteDTO.paciente.fecha}" required="true" pattern="yyyy-MM-dd"
+            showOn="button" label="Fecha" />
+    </div>
+    <div class="field">
+        <p:outputLabel for="empleado" value="Cue:" />
+        <p:selectOneMenu id="empleado" value="#{inicioEmpleado.selectedEmpleado}">
+            <f:selectItem itemLabel="Seleccione un empleado" itemValue="" />
+            <f:selectItems value="#{inicioEmpleado.listaEmpleados}" var="empleado"
+                itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}" itemValue="#{empleado}" />
+        </p:selectOneMenu>
+    </div>
+    <div class="field">
+        <p:outputLabel for="tipo_examen" value="Tipo Examen:" />
+        <p:selectOneMenu id="tipo_examen" value="#{inicioTipoExamen.selectedTipoExamen}">
+            <f:selectItem itemLabel="Seleccione un Tipo de Examen" itemValue="" />
+            <f:selectItems value="#{inicioTipoExamen.listaTipoExamen}" var="tipo_examen"
+                itemLabel="#{tipo_examen.id} - #{tipo_examen.descripcion}" itemValue="#{tipo_examen}" />
+        </p:selectOneMenu>
+    </div>
+</h:panelGroup>
+            
+        
 
         <h2>Antecedentes Clínicos</h2>
 
-        <p:dataTable id="antecedentesTable" var="antecedente" value="#{pacienteDTO.paciente.antecedentes}" editable="true">
-            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages"/>
+        <p:dataTable id="antecedentesTable" var="antecedente" value="#{pacienteDTO.paciente.antecedentes}"
+            editable="true">
+            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages" />
+            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages" />
 
             <p:column headerText="ID Antecedente Clínico">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{antecedente.id_antecedente_clinico}"/>
+                        <h:outputText value="#{antecedente.id_antecedente_clinico}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{antecedente.id_antecedente_clinico}" style="width:100%"/>
+                        <p:inputText value="#{antecedente.id_antecedente_clinico}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Respuesta">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{antecedente.respuesta}"/>
+                        <h:outputText value="#{antecedente.respuesta}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{antecedente.respuesta}" style="width:100%"/>
+                        <p:inputText value="#{antecedente.respuesta}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Observaciones">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{antecedente.observaciones}"/>
+                        <h:outputText value="#{antecedente.observaciones}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{antecedente.observaciones}" style="width:100%"/>
+                        <p:inputText value="#{antecedente.observaciones}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Acciones">
                 <p:rowEditor />
-                <p:commandButton value="Agregar" action="#{pacienteDTO.addAntecedente}" icon="ui-icon-plus" update="antecedentesTable"/>
+                <p:commandButton value="Agregar" action="#{pacienteDTO.addAntecedente}" icon="ui-icon-plus"
+                    update="antecedentesTable" />
             </p:column>
         </p:dataTable>
 
         <h2>Signos Vitales</h2>
 
         <p:dataTable id="signosTable" var="signo" value="#{pacienteDTO.paciente.signos}" editable="true">
-            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages"/>
+            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages" />
+            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages" />
 
             <p:column headerText="ID Signo Vital">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{signo.id_signo_vital}"/>
+                        <h:outputText value="#{signo.id_signo_vital}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{signo.id_signo_vital}" style="width:100%"/>
+                        <p:inputText value="#{signo.id_signo_vital}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Valor">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{signo.valor}"/>
+                        <h:outputText value="#{signo.valor}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{signo.valor}" style="width:100%"/>
+                        <p:inputText value="#{signo.valor}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Unidad">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{signo.unidad}"/>
+                        <h:outputText value="#{signo.unidad}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{signo.unidad}" style="width:100%"/>
+                        <p:inputText value="#{signo.unidad}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Acciones">
                 <p:rowEditor />
-                <p:commandButton value="Agregar" action="#{pacienteDTO.addSigno}" icon="ui-icon-plus" update="signosTable"/>
+                <p:commandButton value="Agregar" action="#{pacienteDTO.addSigno}" icon="ui-icon-plus"
+                    update="signosTable" />
             </p:column>
         </p:dataTable>
 
         <h2>Aparatos Sistemas</h2>
 
         <p:dataTable id="aparatosTable" var="aparato" value="#{pacienteDTO.paciente.aparatos}" editable="true">
-            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages"/>
+            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages" />
+            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages" />
 
             <p:column headerText="ID Aparato Sistema">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{aparato.id_aparato_sistema}"/>
+                        <h:outputText value="#{aparato.id_aparato_sistema}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{aparato.id_aparato_sistema}" style="width:100%"/>
+                        <p:inputText value="#{aparato.id_aparato_sistema}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Descripción">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{aparato.descripcion}"/>
+                        <h:outputText value="#{aparato.descripcion}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{aparato.descripcion}" style="width:100%"/>
+                        <p:inputText value="#{aparato.descripcion}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Estado">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{aparato.estado}"/>
+                        <h:outputText value="#{aparato.estado}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{aparato.estado}" style="width:100%"/>
+                        <p:inputText value="#{aparato.estado}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Acciones">
                 <p:rowEditor />
-                <p:commandButton value="Agregar" action="#{pacienteDTO.addAparato}" icon="ui-icon-plus" update="aparatosTable"/>
+                <p:commandButton value="Agregar" action="#{pacienteDTO.addAparato}" icon="ui-icon-plus"
+                    update="aparatosTable" />
             </p:column>
         </p:dataTable>
 
         <h2>Examen Físico</h2>
 
         <p:dataTable id="examenTable" var="examen" value="#{pacienteDTO.paciente.examenes}" editable="true">
-            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages"/>
-            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages"/>
+            <p:ajax event="rowEdit" listener="#{pacienteDTO.onRowEdit}" update=":pacienteForm:messages" />
+            <p:ajax event="rowEditCancel" listener="#{pacienteDTO.onRowCancel}" update=":pacienteForm:messages" />
 
             <p:column headerText="ID Examen Físico">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{examen.id_examen_fisico}"/>
+                        <h:outputText value="#{examen.id_examen_fisico}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{examen.id_examen_fisico}" style="width:100%"/>
+                        <p:inputText value="#{examen.id_examen_fisico}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Resultado">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{examen.resultado}"/>
+                        <h:outputText value="#{examen.resultado}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{examen.resultado}" style="width:100%"/>
+                        <p:inputText value="#{examen.resultado}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Observaciones">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{examen.observaciones}"/>
+                        <h:outputText value="#{examen.observaciones}" />
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{examen.observaciones}" style="width:100%"/>
+                        <p:inputText value="#{examen.observaciones}" style="width:100%" />
                     </f:facet>
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Acciones">
                 <p:rowEditor />
-                <p:commandButton value="Agregar" action="#{pacienteDTO.agregarExamen}" icon="ui-icon-plus" update="examenTable"/>
+                <p:commandButton value="Agregar" action="#{pacienteDTO.agregarExamen}" icon="ui-icon-plus"
+                    update="examenTable" />
             </p:column>
         </p:dataTable>
 
         <h2>Conclusiones</h2>
         <p:panelGrid columns="6" styleClass="grid">
-            <p:outputLabel for="recomendacion" value="Recomendación:"/>
-            <p:inputTextarea id="recomendacion" value="#{pacienteDTO.paciente.recomendacion}" rows="3" cols="30"/>
+            <p:outputLabel for="recomendacion" value="Recomendación:" />
+            <p:inputTextarea id="recomendacion" value="#{pacienteDTO.paciente.recomendacion}" rows="3" cols="30" />
 
-            <p:outputLabel for="apto_laborar" value="Apto para Laborar:"/>
-            <p:selectBooleanCheckbox id="apto_laborar" value="#{pacienteDTO.paciente.apto_laborar}"/>
+            <p:outputLabel for="apto_laborar" value="Apto para Laborar:" />
+            <p:selectBooleanCheckbox id="apto_laborar" value="#{pacienteDTO.paciente.apto_laborar}" />
 
-            <p:outputLabel for="fecha_vencimiento" value="Fecha de Vencimiento:"/>
-            <p:calendar id="fecha_vencimiento" value="#{pacienteDTO.paciente.fecha_vencimiento}" pattern="yyyy-MM-dd" showOn="button"/>
-        
+            <p:outputLabel for="fecha_vencimiento" value="Fecha de Vencimiento:" />
+            <p:calendar id="fecha_vencimiento" value="#{pacienteDTO.paciente.fecha_vencimiento}" pattern="yyyy-MM-dd"
+                showOn="button" />
+
         </p:panelGrid>
-        
-        <div style="margin-top: 20px;">
-            <p:commandButton  value="Guardar" action="#{pacienteDTO.savePaciente}" update="pacienteForm" icon="pi pi-save"/>
-        </div>
-        
-        
 
-        
+        <div style="margin-top: 20px;">
+            <p:commandButton value="Guardar" action="#{pacienteDTO.savePaciente}" update="pacienteForm"
+                icon="pi pi-save" />
+        </div>  
     </h:form>
+    
+    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:outputLabel value="Cargando..." />
+        </p:dialog>
+    
 </h:body>
+
 </html>

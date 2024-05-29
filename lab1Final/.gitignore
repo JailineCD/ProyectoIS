@@ -3,5 +3,3 @@
 *.war
 *.jar
 
-# Ignorar archivos de configuración de Hibernate
-src\main\hibernate.cfg.xml
