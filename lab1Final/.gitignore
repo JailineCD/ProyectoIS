@@ -4,4 +4,4 @@
 *.jar
 
 # Ignorar archivos de configuración de Hibernate
-target\classes\hibernate.cfg.xml
+src\main\hibernate.cfg.xml
