@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author Douglas
  */
 @Entity
-@Table(name = "paciente")
+@Table(name = "puesto")
 public class PuestoDTO implements Serializable {
     
     @Id

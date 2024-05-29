@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Registro de Paciente</title>
@@ -27,44 +26,31 @@
 
         <h:panelGrid columns="6" style="margin-bottom: 20px;">
             <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm" />
-            <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm" oncomplete="PF('reporteDialog').show();" />
+            <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm" />
             <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm" />
             <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" />
             <p:commandButton value="Filtro" icon="pi pi-filter" update=":pacienteForm" />
             <p:commandButton value="Ver Reporte" icon="pi pi-chart-bar" update=":pacienteForm" />
         </h:panelGrid>
-        
-          <p:dialog id="reporteDialog" header="Signos Vitales" widgetVar="reporteDialog" modal="true" width="60%">
-                    <iframe id="reporteFrame" width="100%" height="500px" 
-                            src="pages/Inicio/tipo_signo_vital.xhtml" frameborder="0"></iframe>
-                </p:dialog>
+
+        <p:panelGrid columns="6" styleClass="grid">
+            <p:outputLabel for="fecha" value="Fecha:" />
+            <p:calendar id="fecha" value="#{Paciente.paciente.fecha}" required="true" pattern="yyyy-MM-dd" showOn="button" label="Fecha" />
             
-        
-        <h:panelGroup layout="block" styleClass="contenedor_1">
-    <div class="field">
-        <p:outputLabel for="fecha" value="Fecha:" />
-        <p:calendar id="fecha" value="#{pacienteDTO.paciente.fecha}" required="true" pattern="yyyy-MM-dd"
-            showOn="button" label="Fecha" />
-    </div>
-    <div class="field">
-        <p:outputLabel for="empleado" value="Cue:" />
-        <p:selectOneMenu id="empleado" value="#{inicioEmpleado.selectedEmpleado}">
-            <f:selectItem itemLabel="Seleccione un empleado" itemValue="" />
-            <f:selectItems value="#{inicioEmpleado.listaEmpleados}" var="empleado"
-                itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}" itemValue="#{empleado}" />
-        </p:selectOneMenu>
-    </div>
-    <div class="field">
-        <p:outputLabel for="tipo_examen" value="Tipo Examen:" />
-        <p:selectOneMenu id="tipo_examen" value="#{inicioTipoExamen.selectedTipoExamen}">
-            <f:selectItem itemLabel="Seleccione un Tipo de Examen" itemValue="" />
-            <f:selectItems value="#{inicioTipoExamen.listaTipoExamen}" var="tipo_examen"
-                itemLabel="#{tipo_examen.id} - #{tipo_examen.descripcion}" itemValue="#{tipo_examen}" />
-        </p:selectOneMenu>
-    </div>
-</h:panelGroup>
+            <p:outputLabel for="empleado" value="Cue:" />
+            <p:selectOneMenu id="empleado" value="#{Paciente.paciente.cue}">
+                <f:selectItem itemLabel="Seleccione un empleado" itemValue="" />
+                <f:selectItems value="#{inicioEmpleado.listaEmpleados}" var="empleado"
+                    itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}" itemValue="#{empleado.cue}" />
+            </p:selectOneMenu>
             
-        
+            <p:outputLabel for="tipo_examen" value="Tipo Examen:" />
+            <p:selectOneMenu id="tipo_examen" value="#{Paciente.paciente.idTipoExamen}">
+                <f:selectItem itemLabel="Seleccione un Tipo de Examen" itemValue="" />
+                <f:selectItems value="#{inicioTipoExamen.listaTipoExamen}" var="tipo_examen"
+                    itemLabel="#{tipo_examen.id} - #{tipo_examen.descripcion}" itemValue="#{tipo_examen.id}" />
+            </p:selectOneMenu>
+        </p:panelGrid>
 
         <h2>Antecedentes Clínicos</h2>
 
@@ -238,32 +224,26 @@
                     update="examenTable" />
             </p:column>
         </p:dataTable>
-
+            
         <h2>Conclusiones</h2>
         <p:panelGrid columns="6" styleClass="grid">
             <p:outputLabel for="recomendacion" value="Recomendación:" />
-            <p:inputTextarea id="recomendacion" value="#{pacienteDTO.paciente.recomendacion}" rows="3" cols="30" />
+            <p:inputTextarea id="recomendacion" value="#{Paciente.paciente.recomendacion}" rows="3" cols="30" />
 
             <p:outputLabel for="apto_laborar" value="Apto para Laborar:" />
-            <p:selectBooleanCheckbox id="apto_laborar" value="#{pacienteDTO.paciente.apto_laborar}" />
+            <p:selectBooleanCheckbox id="apto_laborar" value="#{Paciente.paciente.aptoLaborar}" />
 
             <p:outputLabel for="fecha_vencimiento" value="Fecha de Vencimiento:" />
-            <p:calendar id="fecha_vencimiento" value="#{pacienteDTO.paciente.fecha_vencimiento}" pattern="yyyy-MM-dd"
+            <p:calendar id="fecha_vencimiento" value="#{Paciente.paciente.fechaVencimiento}" pattern="yyyy-MM-dd"
                 showOn="button" />
 
         </p:panelGrid>
 
         <div style="margin-top: 20px;">
-            <p:commandButton value="Guardar" action="#{pacienteDTO.savePaciente}" update="pacienteForm"
+            <p:commandButton value="Guardar" action="#{Paciente.guardarPaciente}" update="pacienteForm"
                 icon="pi pi-save" />
         </div>  
     </h:form>
-    
-    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-            <h:outputLabel value="Cargando..." />
-        </p:dialog>
-    
 </h:body>
 
 </html>
