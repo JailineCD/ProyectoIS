@@ -10,7 +10,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <h:head>
         <title>Tipos de Signos Vitales</title>
     </h:head>
-<h:body>
+
+    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="3000"   /> <!-- Desaparece después de 5 segundos -->
+    
     <h:form id="insertForm">
         <p:panelGrid columns="2" styleClass="grid">
             <p:outputLabel for="clave" value="Clave:" />
@@ -19,8 +21,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <p:outputLabel for="descripcion" value="Descripción:" />
             <p:inputText id="descripcion" value="#{bkn_TipoSignoVital.tipoSignoVital.descripcion}" required="true" />
             
-            <p:commandButton value="Insertar" action="#{bkn_TipoSignoVital.guardarSignoVital()}" update=":insertForm" />
+            <p:commandButton value="Insertar" action="#{bkn_TipoSignoVital.guardarTipoSignoVital()}" update=":insertForm messages" />
         </p:panelGrid>
     </h:form>
-</h:body>
+
 </html>

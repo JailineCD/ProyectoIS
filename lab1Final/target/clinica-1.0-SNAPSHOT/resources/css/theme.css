@@ -284,13 +284,30 @@ a {
 }
 
 span.ui-calendar > input.ui-inputfield {
-    width: 100% !important;
+    width: 80% !important;
 }
 
 span.ui-calendar-center > input.ui-inputfield {
     width: 100% !important;
     text-align: center !important;
 }
+
+body .ui-button.ui-button-icon-only .ui-button-text {
+    background: green;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item.ui-state-highlight {
+    background: lightgreen;
+}
+
+body .ui-inputfield.ui-state-focus {
+    box-shadow: 0 0 0 .1em green;
+}
+
+body .ui-selectonemenu:hover {
+    box-shadow: 0 0 0 .1em green;
+}
+
 
 .ui-autocomplete-panel {
     max-height: 200px !important;
@@ -414,7 +431,7 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
 .contenedor_1 {
     display: flex;
     flex-wrap: wrap;
-    width: 60%;
+    width: 55%;
 }
 
 .field {
@@ -428,8 +445,4 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
 .field label {
     margin-bottom: 5px; /* Espaciado entre etiqueta y campo de entrada */
     
-}
-
-.ui-calendar {
-    width: 100%;
 }

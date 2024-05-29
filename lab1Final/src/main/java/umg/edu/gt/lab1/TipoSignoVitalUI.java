@@ -10,7 +10,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import umg.edu.gt.DAO.TipoSignoVitalDAO;
@@ -26,7 +25,7 @@ public class TipoSignoVitalUI implements Serializable {
     
     private TipoSignoVitalDTO tipoSignoVital = new TipoSignoVitalDTO();
     private List<TipoSignoVitalDTO> tipoSignoVitalList;
-    private TipoSignoVitalDAO tipoSignoVitalDAO;
+    private TipoSignoVitalDAO tipoSignoVitalDAO = new TipoSignoVitalDAO();
     
     
     private String clave;
@@ -68,16 +67,22 @@ public class TipoSignoVitalUI implements Serializable {
         System.out.println("Ingresando a guardar tipo de signo vital: " + tipoSignoVital);
         if (tipoSignoVital.getClave() == null || tipoSignoVital.getClave().isEmpty() 
                 || tipoSignoVital.getDescripcion() == null || tipoSignoVital.getDescripcion().isEmpty()) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El clave y descripcoin no deben estar vacios.");
+            System.out.println("Error. Clave y descripción no deben estar vacios");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "La clave y descripción no deben estar vacios.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             tipoSignoVitalDAO.insertarTipoSignoVital(tipoSignoVital);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "El Tipo de Signo Vital ha sido insertado correctamente.");
+            this.clave = "";
+            this.descripcion = "";
+            this.tipoSignoVital = new TipoSignoVitalDTO();
+            //System.out.println("el tipo signo vital ha insertado correctamente");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "El Tipo de Signo Vital ha sido insertado correctamente.");
         FacesContext.getCurrentInstance().addMessage(null, message);
             // Actualizar la lista de tipos de signo vital si es necesario
         }
     } catch (Exception e) {
         e.printStackTrace();
+        //System.out.println("error al insertar el tipo de signo vital " + e.getMessage());
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al insertar el Tipo de Signo Vital: " + e.getMessage());
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
