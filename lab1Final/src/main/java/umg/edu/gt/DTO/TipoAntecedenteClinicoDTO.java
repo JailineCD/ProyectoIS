@@ -15,7 +15,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tipo_antecedente_clinico")
 public class TipoAntecedenteClinicoDTO implements Serializable {
-    
+     @Override
+    public String toString() {
+        return "TipoAntecedenteClinicoDTO@" + Integer.toHexString(hashCode());
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

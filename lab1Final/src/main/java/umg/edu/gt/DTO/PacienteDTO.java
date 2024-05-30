@@ -6,6 +6,7 @@ package umg.edu.gt.DTO;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 /**
  *
@@ -14,7 +15,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "paciente")
 public class PacienteDTO implements Serializable {
-    
+    @Override
+    public String toString() {
+        return "PacienteDTO@" + Integer.toHexString(hashCode());
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -46,7 +50,6 @@ public class PacienteDTO implements Serializable {
 
     @Column(name = "usuario", length = 50)
     private String usuario;
-
     /**
      * @return the id
      */

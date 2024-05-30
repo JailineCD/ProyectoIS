@@ -6,7 +6,6 @@ package umg.edu.gt.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
 /**
  *
  * @author Douglas
@@ -25,139 +23,126 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "antecedente_clinico")
 public class AntecedenteClinicoDTO implements Serializable {
-    
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "id_paciente")
-    private PacienteDTO id_paciente;
-    
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id", nullable = false)
+    private PacienteDTO idPaciente;
+
     @ManyToOne
-    @JoinColumn(name = "id_antecedente_clinico")
-    private TipoAntecedenteClinicoDTO id_antecedente_clinico;
+    @JoinColumn(name = "id_antecedente_clinico", referencedColumnName = "id", nullable = false)
+    private TipoAntecedenteClinicoDTO idAntecedenteClinico;
 
-    @Column(name = "usuario")
-    private String usuario;
-
-    @Column(name = "observaciones")
-    private String observaciones;
-
-    @Column(name = "respuesta")
+    @Column(name = "respuesta", length = 255)
     private String respuesta;
 
-    @Column(name = "update_time")
-    private LocalDateTime update_time;
+    @Column(name = "usuario", length = 255)
+    private String usuario;
+
+    @Column(name = "observaciones", length = 255)
+    private String observaciones;
 
     @Column(name = "created_time")
-    private LocalDateTime created_time;
+    private LocalDateTime createdTime;
 
-    /* Estas anotaciones indican que el método prePersistUpdate() debe ser llamado 
-    antes de que la entidad se persista (se inserte por primera vez en la base de datos) 
-    o se actualice. Dentro de este método, se establece updateTime a la fecha y hora actuales usando LocalDateTime.now() */
+    @Column(name = "update_time")
+    private LocalDateTime updateTime;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_antecedente_clinico_id")
+    private TipoAntecedenteClinicoDTO tipoAntecedenteClinicoId;
+
+    // Constructor vacío
+    public AntecedenteClinicoDTO() {}
+
     @PrePersist
     @PreUpdate
     public void prePersistUpdate() {
-        update_time = LocalDateTime.now();
-        created_time = LocalDateTime.now();
-    }
-    
-    /**
-     * @return the id_paciente
-     */
-    public PacienteDTO getId_paciente() {
-        return id_paciente;
+        this.updateTime = LocalDateTime.now();
+        if (this.createdTime == null) {
+            this.createdTime = LocalDateTime.now();
+        }
     }
 
-    /**
-     * @param id_paciente the id_paciente to set
-     */
-    public void setId_paciente(PacienteDTO id_paciente) {
-        this.id_paciente = id_paciente;
+    // Getters y Setters
+
+    public PacienteDTO getIdPaciente() {
+        return idPaciente;
     }
 
-    /**
-     * @return the id_antecedente_clinico
-     */
-    public TipoAntecedenteClinicoDTO getId_antecedente_clinico() {
-        return id_antecedente_clinico;
+    public void setIdPaciente(PacienteDTO idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    /**
-     * @param id_antecedente_clinico the id_antecedente_clinico to set
-     */
-    public void setId_antecedente_clinico(TipoAntecedenteClinicoDTO id_antecedente_clinico) {
-        this.id_antecedente_clinico = id_antecedente_clinico;
+    public TipoAntecedenteClinicoDTO getIdAntecedenteClinico() {
+        return idAntecedenteClinico;
     }
 
-    /**
-     * @return the usuario
-     */
-    public String getUsuario() {
-        return usuario;
+    public void setIdAntecedenteClinico(TipoAntecedenteClinicoDTO idAntecedenteClinico) {
+        this.idAntecedenteClinico = idAntecedenteClinico;
     }
 
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    /**
-     * @return the observaciones
-     */
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    /**
-     * @param observaciones the observaciones to set
-     */
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    /**
-     * @return the respuesta
-     */
     public String getRespuesta() {
         return respuesta;
     }
 
-    /**
-     * @param respuesta the respuesta to set
-     */
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
 
-    /**
-     * @return the update_time
-     */
-    public LocalDateTime getUpdate_time() {
-        return update_time;
+    public String getUsuario() {
+        return usuario;
     }
 
-    /**
-     * @param update_time the update_time to set
-     */
-    public void setUpdate_time(LocalDateTime update_time) {
-        this.update_time = update_time;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    /**
-     * @return the created_time
-     */
-    public LocalDateTime getCreated_time() {
-        return created_time;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    /**
-     * @param created_time the created_time to set
-     */
-    public void setCreated_time(LocalDateTime created_time) {
-        this.created_time = created_time;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
 
-    
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public TipoAntecedenteClinicoDTO getTipoAntecedenteClinicoId() {
+        return tipoAntecedenteClinicoId;
+    }
+
+    public void setTipoAntecedenteClinicoId(TipoAntecedenteClinicoDTO tipoAntecedenteClinicoId) {
+        this.tipoAntecedenteClinicoId = tipoAntecedenteClinicoId;
+    }
 }

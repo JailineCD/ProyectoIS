@@ -16,7 +16,7 @@ import umg.edu.gt.DTO.EmpleadosDTO;
 public class InicioEmpleadoUI implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     private List<EmpleadosDTO> listaEmpleados;
     private List<Long> listaCues;
     private Long selectedCue;
