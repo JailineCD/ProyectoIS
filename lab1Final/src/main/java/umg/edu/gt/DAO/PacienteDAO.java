@@ -80,7 +80,7 @@ public class PacienteDAO implements Serializable {
             System.out.println("Error al guardar el paciente: " + e.getMessage());
         }
     }
-     public PacienteDTO obtenerPacienteExistente(Date fecha, int empleadoCue, int tipoExamenId) {
+    public PacienteDTO obtenerPacienteExistente(Date fecha, int empleadoCue, int tipoExamenId) {
     PacienteDTO pacienteExistente = null;
     try (Session session = HibernateUtil.getSessionFactory().openSession()) {
         String queryStr = "FROM PacienteDTO p " +
@@ -95,8 +95,9 @@ public class PacienteDAO implements Serializable {
     } catch (Exception e) {
         System.out.println("Error al obtener el paciente existente: " + e.getMessage());
     }
-    return pacienteExistente;
-}
+        return pacienteExistente;
+    }
+
 
     
     public void actualizar(PacienteDTO paciente) {

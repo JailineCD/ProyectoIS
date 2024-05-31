@@ -1,149 +1,115 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package umg.edu.gt.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
-/**
- *
- * @author Douglas
- */
 @Entity
 @Table(name = "signo_vital")
 public class SignoVitalDTO implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "id_paciente")
-    private PacienteDTO id_paciente;
-    
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id", nullable = false)
+    private PacienteDTO idPaciente;
+
     @ManyToOne
-    @JoinColumn(name = "id_signo_vital")
-    private TipoSignoVitalDTO id_signo_vital;
-    
-    @Column(name = "valor")
-    private String valor;
-    
-    @Column(name = "usuario")
-    private String usuario;
-    
-    @Column(name = "observaciones")
+    @JoinColumn(name = "id_signo_vital", referencedColumnName = "id", nullable = false)
+    private TipoSignoVitalDTO idTipoSignoVital;
+
+    @Column(name = "respuesta", length = 50)
+    private String respuesta;
+
+    @Column(name = "observaciones", length = 200)
     private String observaciones;
     
-    @Column(name = "create_time")
-    private LocalDateTime create_time;
-    
+    @Column(name = "usuario", length = 50)
+    private String usuario;
+
+    @Column(name = "create_time", nullable = false, updatable = false)
+    private LocalDateTime createTime;
+
     @Column(name = "update_time")
-    private LocalDateTime update_time;
-    
+    private LocalDateTime updateTime;
+
     @PrePersist
     @PreUpdate
     public void prePersistUpdate() {
-        setCreate_time(LocalDateTime.now());
-        setUpdate_time(LocalDateTime.now());
+        this.updateTime = LocalDateTime.now();
+        if (this.createTime == null) {
+            this.createTime = LocalDateTime.now();
+        }
     }
 
-    /**
-     * @return the id_paciente
-     */
-    public PacienteDTO getId_paciente() {
-        return id_paciente;
+    // Constructor vacío
+    public SignoVitalDTO() {}
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
     }
 
-    /**
-     * @param id_paciente the id_paciente to set
-     */
-    public void setId_paciente(PacienteDTO id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * @return the id_signo_vital
-     */
-    public TipoSignoVitalDTO getId_signo_vital() {
-        return id_signo_vital;
+    public PacienteDTO getIdPaciente() {
+        return idPaciente;
     }
 
-    /**
-     * @param id_signo_vital the id_signo_vital to set
-     */
-    public void setId_signo_vital(TipoSignoVitalDTO id_signo_vital) {
-        this.id_signo_vital = id_signo_vital;
+    public void setIdPaciente(PacienteDTO idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
-    /**
-     * @return the valor
-     */
-    public String getValor() {
-        return valor;
+    public TipoSignoVitalDTO getIdTipoSignoVital() {
+        return idTipoSignoVital;
     }
 
-    /**
-     * @param valor the valor to set
-     */
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setIdTipoSignoVital(TipoSignoVitalDTO idTipoSignoVital) {
+        this.idTipoSignoVital = idTipoSignoVital;
     }
 
-    /**
-     * @return the usuario
-     */
-    public String getUsuario() {
-        return usuario;
+    public String getRespuesta() {
+        return respuesta;
     }
 
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
-    /**
-     * @return the observaciones
-     */
     public String getObservaciones() {
         return observaciones;
     }
 
-    /**
-     * @param observaciones the observaciones to set
-     */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
 
-    /**
-     * @return the create_time
-     */
-    public LocalDateTime getCreate_time() {
-        return create_time;
+    public String getUsuario() {
+        return usuario;
     }
 
-    /**
-     * @param create_time the create_time to set
-     */
-    public void setCreate_time(LocalDateTime create_time) {
-        this.create_time = create_time;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    /**
-     * @return the update_time
-     */
-    public LocalDateTime getUpdate_time() {
-        return update_time;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    /**
-     * @param update_time the update_time to set
-     */
-    public void setUpdate_time(LocalDateTime update_time) {
-        this.update_time = update_time;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
-    
-    
 
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
 }

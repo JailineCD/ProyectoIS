@@ -62,11 +62,7 @@ public class AntecedenteClinicoDTO implements Serializable {
     private LocalDateTime createdTime;
 
     @Column(name = "update_time")
-    private LocalDateTime updateTime;
-
-    @ManyToOne
-    @JoinColumn(name = "tipo_antecedente_clinico_id")
-    private TipoAntecedenteClinicoDTO tipoAntecedenteClinicoId;
+    private LocalDateTime updateTime; 
 
     // Constructor vacío
     public AntecedenteClinicoDTO() {}
@@ -136,13 +132,5 @@ public class AntecedenteClinicoDTO implements Serializable {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public TipoAntecedenteClinicoDTO getTipoAntecedenteClinicoId() {
-        return tipoAntecedenteClinicoId;
-    }
-
-    public void setTipoAntecedenteClinicoId(TipoAntecedenteClinicoDTO tipoAntecedenteClinicoId) {
-        this.tipoAntecedenteClinicoId = tipoAntecedenteClinicoId;
     }
 }

@@ -6,153 +6,119 @@ package umg.edu.gt.DTO;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
- *
- * @author Douglas
+ * Entidad para representar los registros de la tabla aparato_sistemas
+ * 
+ * @autor Douglas
  */
 @Entity
 @Table(name = "aparato_sistemas")
 public class AparatoSistemasDTO implements Serializable {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "id_paciente")
-    private PacienteDTO id_paciente;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    
     @ManyToOne
-    @JoinColumn(name = "id_aparato_sistema")
-    private TipoAparatoSistemasDTO id_aparato_sistema;
-    
-    @Column(name = "respuesta")
-    private int respuesta;
-    
-    @Column(name = "usuario")
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id", nullable = false)
+    private PacienteDTO idPaciente; 
+    @ManyToOne
+    @JoinColumn(name = "id_aparato_sistema", referencedColumnName = "id", nullable = false)
+    private TipoAparatoSistemasDTO idAparatoSistema;
+
+    @Column(name = "respuesta", length = 200)
+    private String respuesta;
+
+    @Column(name = "usuario", length = 50)
     private String usuario;
-    
-    @Column(name = "observaciones")
+
+    @Column(name = "observaciones", length = 200)
     private String observaciones;
-    
-    @Column(name = "create_time")
-    private LocalDateTime create_time;
-    
+
+    @Column(name = "create_time", nullable = false, updatable = false)
+    private LocalDateTime createTime;
+
     @Column(name = "update_time")
-    private LocalDateTime update_time;
-    
-    
+    private LocalDateTime updateTime;
+
+    // Constructor vacío
+    public AparatoSistemasDTO() {}
+
     @PrePersist
     @PreUpdate
     public void prePersistUpdate() {
-        create_time = LocalDateTime.now();
-        update_time = LocalDateTime.now();
-    }
-    
-    /**
-     * @return the id_paciente
-     */
-    public PacienteDTO getId_paciente() {
-        return id_paciente;
+        this.updateTime = LocalDateTime.now();
+        if (this.createTime == null) {
+            this.createTime = LocalDateTime.now();
+        }
     }
 
-    /**
-     * @param id_paciente the id_paciente to set
-     */
-    public void setId_paciente(PacienteDTO id_paciente) {
-        this.id_paciente = id_paciente;
+    // Getters y Setters
+
+    public Long getId() {
+        return id;
     }
 
-    /**
-     * @return the id_aparato_sistema
-     */
-    public TipoAparatoSistemasDTO getId_aparato_sistema() {
-        return id_aparato_sistema;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * @param id_aparato_sistema the id_aparato_sistema to set
-     */
-    public void setId_aparato_sistema(TipoAparatoSistemasDTO id_aparato_sistema) {
-        this.id_aparato_sistema = id_aparato_sistema;
+    public PacienteDTO getIdPaciente() {
+        return idPaciente;
     }
 
-    /**
-     * @return the respuesta
-     */
-    public int getRespuesta() {
+    public void setIdPaciente(PacienteDTO idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public TipoAparatoSistemasDTO getIdAparatoSistema() {
+        return idAparatoSistema;
+    }
+
+    public void setIdAparatoSistema(TipoAparatoSistemasDTO idAparatoSistema) {
+        this.idAparatoSistema = idAparatoSistema;
+    }
+
+    public String getRespuesta() {
         return respuesta;
     }
 
-    /**
-     * @param respuesta the respuesta to set
-     */
-    public void setRespuesta(int respuesta) {
+    public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
 
-    /**
-     * @return the usuario
-     */
     public String getUsuario() {
         return usuario;
     }
 
-    /**
-     * @param usuario the usuario to set
-     */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     * @return the observaciones
-     */
     public String getObservaciones() {
         return observaciones;
     }
 
-    /**
-     * @param observaciones the observaciones to set
-     */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
 
-    /**
-     * @return the create_time
-     */
-    public LocalDateTime getCreate_time() {
-        return create_time;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    /**
-     * @param create_time the create_time to set
-     */
-    public void setCreate_time(LocalDateTime create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
-    /**
-     * @return the update_time
-     */
-    public LocalDateTime getUpdate_time() {
-        return update_time;
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
-    /**
-     * @param update_time the update_time to set
-     */
-    public void setUpdate_time(LocalDateTime update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
-    
-    
 }
