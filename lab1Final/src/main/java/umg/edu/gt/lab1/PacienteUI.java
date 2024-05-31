@@ -1,6 +1,7 @@
 package umg.edu.gt.lab1;
 
 import Util.HibernateUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,8 +10,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.Session;
+import org.jboss.weld.context.RequestContext;
 import umg.edu.gt.DAO.ConexionDAO;
 import umg.edu.gt.DAO.PacienteDAO;
 import umg.edu.gt.DTO.AntecedenteClinicoDTO;
@@ -18,6 +21,7 @@ import umg.edu.gt.DTO.EmpleadosDTO;
 import umg.edu.gt.DTO.PacienteDTO;
 import umg.edu.gt.DTO.SignoVitalDTO;
 import umg.edu.gt.DTO.TipoExamenDTO; 
+
 
 @ManagedBean(name = "pacienteUI")
 @ViewScoped
@@ -187,7 +191,8 @@ public class PacienteUI implements Serializable {
     public List<TipoExamenDTO> getTiposExamen() {
         return tiposExamen;
     }
-
+    
+    
     public void cargarEmpleados() {
         ConexionDAO conexion = new ConexionDAO();
         Session session = conexion.obtenerSesion();
@@ -198,6 +203,17 @@ public class PacienteUI implements Serializable {
         }
     }
 
+    public void openReport() {
+        String reportUrl = "http://192.168.4.34/ReportServer/Pages/ReportViewer.aspx?%2fAdministracion%2freporteExamenClinico&rs:Command=Render:ClearSession=true&rc:Parameters=true&rc:toolbar=true&rs:Embed=TRUE";
+
+        try {
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            externalContext.redirect(reportUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void cargarTiposExamen() {
         ConexionDAO conexion = new ConexionDAO();
         Session session = conexion.obtenerSesion();
