@@ -82,7 +82,7 @@
                 <p:panel header="Antecedentes Clinicos" class="panel-header">
                     <div class="panel-body">
                         <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
-                                     editable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
+                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
                             <p:column headerText="Antecedente">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -129,7 +129,7 @@
                 <p:panel header="Signos Vitales" class="panel-header">
                     <div class="panel-body">
                         <p:dataTable id="signosVitalesTable" var="signoVital" value="#{signosVitalesUI.signosVitales}"
-                                     editable="true" rowKey="#{signoVital.id}" selectionMode="single" editMode="cell">
+                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{signoVital.id}" selectionMode="single" editMode="cell">
                             <p:column headerText="Signo Vital">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -174,7 +174,7 @@
                     <div class="panel-body">
                         <p:dataTable id="aparatosSistemasTable" var="aparatoSistema"
                                      value="#{aparatoSistemasUI.aparatoSistemasList}" editable="true" rowKey="#{aparatoSistema.id}"
-                                     selectionMode="single" editMode="cell" widgetVar="cellProducts">
+                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell" widgetVar="cellProducts">
                             <p:column headerText="Aparato/Sistema">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -219,7 +219,7 @@
                     <div class="panel-body">
                         <p:dataTable id="aparatosExamenesTable" var="examenFisico"
                                      value="#{examenFisicosUI.examenFisicos}" editable="true" rowKey="#{examenFisico.id}"
-                                     selectionMode="single" editMode="cell" widgetVar="cellProducts">
+                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell" widgetVar="cellProducts">
                             <p:column headerText="Examenes Fisicos">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -274,7 +274,7 @@
         </h:panelGrid>
 
         <div style="margin-top: 20px;">
-            <p:commandButton value="Guardar" action="#{pacienteUI.guardarPaciente}"
+            <p:commandButton value="Guardar" action="#{pacienteUI.guardarPaciente()}"
                 update="@form:antecedentesTable, @form:signosVitalesTable, @form:aparatosSistemasTable @form:growl"
                 icon="pi pi-save" />
         </div>

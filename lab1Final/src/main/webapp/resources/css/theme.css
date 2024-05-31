@@ -520,3 +520,6 @@ body .ui-chkbox .ui-chkbox-box.ui-state-focus {
     box-shadow: none;
 }
 
+body .ui-panel .ui-panel-titlebar {
+    padding: 0.2rem;
+}
