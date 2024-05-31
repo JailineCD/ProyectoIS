@@ -161,6 +161,7 @@ public class SignosVitalesUI implements Serializable {
         for (SignoVitalDTO signoVital : signosVitales) {
             signoVitalDAO.guardar(signoVital);
         }
+        
     }
       
 }

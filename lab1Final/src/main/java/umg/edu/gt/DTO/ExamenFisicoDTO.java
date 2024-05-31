@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,21 +24,66 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "examen_fisico")
 public class ExamenFisicoDTO implements Serializable {
-    
+
+    /**
+     * @return the idPaciente
+     */
+    public PacienteDTO getIdPaciente() {
+        return idPaciente;
+    }
+
+    /**
+     * @param idPaciente the idPaciente to set
+     */
+    public void setIdPaciente(PacienteDTO idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    /**
+     * @return the respuesta
+     */
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    /**
+     * @param respuesta the respuesta to set
+     */
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "id_paciente")
-    private PacienteDTO id_paciente;
+    private PacienteDTO idPaciente;
 
     @ManyToOne
     @JoinColumn(name = "id_examen_fisico")
     private TipoExamenFisicoDTO id_examen_fisico;
     
-    @Column(name = "resultado")
-    private int resultado;
-    
     @Column(name = "observaciones")
     private String observaciones;
+    
+    @Column(name = "respuesta")
+    private String respuesta;
     
     @Column(name = "usuario")
     private String usuario;
@@ -56,18 +103,9 @@ public class ExamenFisicoDTO implements Serializable {
     }
     
     /**
-     * @return the id_paciente
+     * @return the idPaciente
      */
-    public PacienteDTO getId_paciente() {
-        return id_paciente;
-    }
 
-    /**
-     * @param id_paciente the id_paciente to set
-     */
-    public void setId_paciente(PacienteDTO id_paciente) {
-        this.id_paciente = id_paciente;
-    }
 
     /**
      * @return the id_examen_fisico
@@ -75,26 +113,14 @@ public class ExamenFisicoDTO implements Serializable {
     public TipoExamenFisicoDTO getId_examen_fisico() {
         return id_examen_fisico;
     }
+    
+    
 
     /**
      * @param id_examen_fisico the id_examen_fisico to set
      */
     public void setId_examen_fisico(TipoExamenFisicoDTO id_examen_fisico) {
         this.id_examen_fisico = id_examen_fisico;
-    }
-
-    /**
-     * @return the resultado
-     */
-    public int getResultado() {
-        return resultado;
-    }
-
-    /**
-     * @param resultado the resultado to set
-     */
-    public void setResultado(int resultado) {
-        this.resultado = resultado;
     }
 
     /**

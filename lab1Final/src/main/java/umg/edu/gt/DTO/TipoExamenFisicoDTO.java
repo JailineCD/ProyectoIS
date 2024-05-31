@@ -22,6 +22,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tipo_examen_fisico")
 public class TipoExamenFisicoDTO implements Serializable {
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +47,9 @@ public class TipoExamenFisicoDTO implements Serializable {
     
     @Column(name = "descripcion")
     private String descripcion;
+    
+    @Column(name = "estado")
+    private String estado;
     
     @Column(name = "create_time")
     private LocalDateTime create_time;

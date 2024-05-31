@@ -172,7 +172,46 @@
                 </p:column>
             </p:dataTable>
         </p:panel>
-
+        <p:panel header="Examenes Fisicos">
+            <p:dataTable id="aparatosExamenesTable" var="examenFisico"
+                value="#{examenFisicosUI.examenFisicos}" editable="true" rowKey="#{examenFisico.id}"
+                selectionMode="single" editMode="cell" widgetVar="cellProducts">
+                <p:column headerText="Examenes Fisicos">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{examenFisico.id_examen_fisico.descripcion}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{examenFisico.id_examen_fisico.descripcion}" readonly="true" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Respuesta">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{examenFisico.respuesta}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{examenFisico.respuesta}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Observaciones">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{examenFisico.observaciones}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{examenFisico.observaciones}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Acciones">
+                    <p:commandButton value="Guardar" action="#{examenFisicosUI.guardarExamenFisicos}"
+                        icon="pi pi-save" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
         <h2>Conclusiones</h2>
         <p:panelGrid columns="6" styleClass="grid">
             <p:outputLabel for="recomendacion" value="Recomendación:" />
