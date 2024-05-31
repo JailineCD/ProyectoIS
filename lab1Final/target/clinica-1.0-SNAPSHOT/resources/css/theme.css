@@ -475,12 +475,12 @@ body .ui-datatable thead th {
 
 
 .tablasPrincipal {
-    margin-top: 15px;
+    margin-top: 60px;
 }
 
 /*Configurar el scroll de la tabla*/
 .scrollable-container {
-    height: 290px; /* Ajusta esta altura según tus necesidades */
+    height: 55vh; /* Ajusta esta altura según tus necesidades */
     overflow-y: auto;
     border: 2px solid #ccc; /* Opcional: agregar un borde para visualizar mejor el contenedor */
     border-radius: 10px;
