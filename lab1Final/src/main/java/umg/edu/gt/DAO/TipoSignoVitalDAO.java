@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,6 +22,7 @@ public class TipoSignoVitalDAO {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+             nuevoTipoSignoVital.setCreate_time(LocalDateTime.now());
             session.save(nuevoTipoSignoVital);
             transaction.commit();
         } catch (Exception ex) {
@@ -38,9 +40,12 @@ public class TipoSignoVitalDAO {
         }
     }
 
-    public List<TipoSignoVitalDTO> findAll() {
+    public List<TipoSignoVitalDTO> obtenerTiposSignosVitales() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from TipoSignoVitalDTO", TipoSignoVitalDTO.class).list();
+            return session.createQuery("FROM TipoSignoVitalDTO", TipoSignoVitalDTO.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener los tipos de signos vitales", e);
         }
     }
 
@@ -48,6 +53,7 @@ public class TipoSignoVitalDAO {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            tipoSignoVital.setUpdate_time(LocalDateTime.now());
             session.update(tipoSignoVital);
             transaction.commit();
         } catch (Exception ex) {

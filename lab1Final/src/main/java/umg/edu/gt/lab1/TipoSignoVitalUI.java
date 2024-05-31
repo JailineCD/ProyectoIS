@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 import umg.edu.gt.DAO.TipoSignoVitalDAO;
 import umg.edu.gt.DTO.TipoSignoVitalDTO;
 
@@ -24,43 +25,32 @@ import umg.edu.gt.DTO.TipoSignoVitalDTO;
 public class TipoSignoVitalUI implements Serializable {
     
     private TipoSignoVitalDTO tipoSignoVital = new TipoSignoVitalDTO();
-    private List<TipoSignoVitalDTO> tipoSignoVitalList;
     private TipoSignoVitalDAO tipoSignoVitalDAO = new TipoSignoVitalDAO();
+    private List<TipoSignoVitalDTO> listaSignosVitales;
     
     
     private String clave;
     private String descripcion;
+    private String estado;
+    
     
     public void guardarSignoVital() {
         tipoSignoVital = new TipoSignoVitalDTO();
     }
     
-    
-    
-    // Getters y Setters para clave y descripcion
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
-    
-    
-    @PostConstruct
+   
+   @PostConstruct
     public void init() {
-        tipoSignoVitalList = tipoSignoVitalDAO.findAll();
+        actualizarListaSignosVitales();
     }
 
+    public void actualizarListaSignosVitales() {
+        listaSignosVitales = tipoSignoVitalDAO.obtenerTiposSignosVitales();
+    }
+
+    public void addTipoSignoVital() {
+        tipoSignoVital = new TipoSignoVitalDTO();
+    }
        
     public void guardarTipoSignoVital() {
     try {
@@ -72,6 +62,7 @@ public class TipoSignoVitalUI implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             tipoSignoVitalDAO.insertarTipoSignoVital(tipoSignoVital);
+            actualizarListaSignosVitales();
             this.clave = "";
             this.descripcion = "";
             this.tipoSignoVital = new TipoSignoVitalDTO();
@@ -90,24 +81,39 @@ public class TipoSignoVitalUI implements Serializable {
 
 
 
-    public void updateTipoSignoVital() {
+    public void guardarCambios(TipoSignoVitalDTO signoVital) {
+        FacesContext context = FacesContext.getCurrentInstance();
         try {
-            tipoSignoVitalDAO.actualizarTipoSignoVital(tipoSignoVital);
-            // Actualizar la lista en la vista si es necesario
+            tipoSignoVitalDAO.actualizarTipoSignoVital(signoVital);
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cambios guardados correctamente"));
+            actualizarListaSignosVitales();
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejo de errores, agregar mensaje de error a la vista
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al guardar los cambios del tipo de signo vital " + e.getMessage()));
         }
     }
 
-    public void deleteTipoSignoVital(TipoSignoVitalDTO tipoSignoVital) {
+    public void eliminar(TipoSignoVitalDTO signoVital) {
         try {
-            tipoSignoVitalDAO.eliminarTipoSignoVital(tipoSignoVital);
-            tipoSignoVitalList.remove(tipoSignoVital);
+            tipoSignoVitalDAO.eliminarTipoSignoVital(signoVital);
+            actualizarListaSignosVitales();
+            System.out.println("Eliminado correctamente");
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejo de errores, agregar mensaje de error a la vista
+            System.out.println("Error al eliminar el tipo de signo vital " + e.getMessage());
         }
+    }
+    
+    
+    public void onRowEdit(RowEditEvent<TipoSignoVitalDTO> event) {
+        TipoSignoVitalDTO signoVitalEditado = event.getObject();
+        guardarCambios(signoVitalEditado);
+    }
+
+    public void onRowCancel(RowEditEvent<TipoSignoVitalDTO> event) {
+        TipoSignoVitalDTO signoVitalCancelado = event.getObject();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Edición cancelada", "Se canceló la edición");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     // Getters y Setters
@@ -119,12 +125,43 @@ public class TipoSignoVitalUI implements Serializable {
         this.tipoSignoVital = tipoSignoVital;
     }
 
-    public List<TipoSignoVitalDTO> getTipoSignoVitalList() {
-        return tipoSignoVitalList;
+   public List<TipoSignoVitalDTO> getListaSignosVitales() {
+        return listaSignosVitales;
     }
 
-    public void setTipoSignoVitalList(List<TipoSignoVitalDTO> tipoSignoVitalList) {
-        this.tipoSignoVitalList = tipoSignoVitalList;
+    public void setListaSignosVitales(List<TipoSignoVitalDTO> listaSignosVitales) {
+        this.listaSignosVitales = listaSignosVitales;
+    }
+    
+    // Getters y Setters para clave y descripcion
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

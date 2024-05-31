@@ -22,20 +22,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tipo_examen_fisico")
 public class TipoExamenFisicoDTO implements Serializable {
-
-    /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,9 +33,6 @@ public class TipoExamenFisicoDTO implements Serializable {
     
     @Column(name = "descripcion")
     private String descripcion;
-    
-    @Column(name = "estado")
-    private String estado;
     
     @Column(name = "create_time")
     private LocalDateTime create_time;
@@ -64,6 +47,9 @@ public class TipoExamenFisicoDTO implements Serializable {
         setUpdate_time(LocalDateTime.now());
     }
 
+    @Column(name = "estado")
+    private String estado = "Activo";  // Default value
+    
     /**
      * @return the id
      */
@@ -117,8 +103,12 @@ public class TipoExamenFisicoDTO implements Serializable {
      * @param create_time the create_time to set
      */
     public void setCreate_time(LocalDateTime create_time) {
+    // Verificar si create_time es nulo, lo que indica que el objeto se está creando por primera vez
+    if (this.create_time == null) {
         this.create_time = create_time;
     }
+}
+
 
     /**
      * @return the update_time
@@ -131,8 +121,24 @@ public class TipoExamenFisicoDTO implements Serializable {
      * @param update_time the update_time to set
      */
     public void setUpdate_time(LocalDateTime update_time) {
+    // Verificar si el objeto ya tiene un ID asignado, lo que indica que es una actualización
+    if (id != null) {
         this.update_time = update_time;
     }
+}
+
     
-    
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

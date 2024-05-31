@@ -138,12 +138,13 @@ a {
 }
 
 .ui-datatable-data{
-    font-size: 1.1em !important;
+    font-size: 0.9em !important;
 }
 
 .ui-paginator {
-    border: 1px solid #a4acb0 !important;
+    border: none;
     margin: auto !important;
+    padding: 0;
     background: #ffffff url("#{resource['primefaces-saqbe:images/ui-bg_flat_75_ffffff_40x100.png']}") 50% 50% repeat-x !important;
 }
 
@@ -153,7 +154,7 @@ a {
 }
 
 .ui-column-title {
-    font-size: 1.2em !important;
+    font-size: 1em !important;
     font-weight: bold !important;
 }
 
@@ -399,7 +400,11 @@ div.textoBlancoFondoAqua>ul.ui-menu-list>li.ui-menuitem>a.ui-menuitem-link>span.
 body .ui-button.ui-button-text-icon-left .ui-button-text {
             background-color: green;
         }
-               
+
+/*Color de los botones en los modales*/
+body .ui-button.ui-button-text-only .ui-button-text {
+    background-color: green;
+}
 
 .contenedor_titulo {
     width: 100%;
@@ -446,3 +451,48 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
     margin-bottom: 5px; /* Espaciado entre etiqueta y campo de entrada */
     
 }
+
+
+/*Propiedades para cambiar color a los mensajes
+body .ui-growl .ui-growl-item-container .ui-growl-item {
+    background: greenyellow;
+}
+
+
+body .ui-growl .ui-growl-item-container.ui-growl-info {
+    border: 1px solid #f5f5f5;
+}*/
+
+
+/*Padding entre los elementos de la tablas*/
+body .ui-datatable .ui-datatable-data>tr>td {
+    padding: 0.2px;
+}
+
+body .ui-datatable thead th {
+    padding: 0.05rem 0.05rem;
+}
+
+
+.tablasPrincipal {
+    margin-top: 15px;
+}
+
+/*Configurar el scroll de la tabla*/
+.scrollable-container {
+    height: 290px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto;
+    border: 2px solid #ccc; /* Opcional: agregar un borde para visualizar mejor el contenedor */
+    border-radius: 10px;
+    padding: 10px; /* Opcional: agregar un padding para mejor apariencia */
+}
+
+body .ui-chkbox .ui-chkbox-box.ui-state-active {
+    color: green;
+    border: 2px solid green;
+}
+
+body .ui-chkbox .ui-chkbox-box.ui-state-focus {
+    box-shadow: none;
+}
+

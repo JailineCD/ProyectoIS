@@ -4,6 +4,7 @@
  */
 package umg.edu.gt.DTO;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tipo_examen_laboratorio")
-public class TipoExamenLaboratorioDTO {
+public class TipoExamenLaboratorioDTO implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,9 @@ public class TipoExamenLaboratorioDTO {
     
     @Column(name = "update_time")
     private LocalDateTime update_time;
+    
+    @Column(name = "estado")
+    private String estado = "Activo";  // Default value
 
     @PrePersist
     @PreUpdate
@@ -99,7 +103,9 @@ public class TipoExamenLaboratorioDTO {
      * @param create_time the create_time to set
      */
     public void setCreate_time(LocalDateTime create_time) {
+        if (this.create_time == null) {
         this.create_time = create_time;
+    }
     }
 
     /**
@@ -113,6 +119,22 @@ public class TipoExamenLaboratorioDTO {
      * @param update_time the update_time to set
      */
     public void setUpdate_time(LocalDateTime update_time) {
-        this.update_time = update_time;
+        if (this.id != null) {
+            this.update_time = update_time;
+        }
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

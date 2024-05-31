@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Registro de Paciente</title>
+    <title>Gestión de Exámenes Médicos | Registro de Paciente</title>
     <h:outputStylesheet library="css" name="default.css" />
     <h:outputStylesheet library="css" name="theme.css" />
     <link rel="icon" type="image/png" href="#{resource['images/examen.png']}" />
@@ -10,6 +10,8 @@
 <h:body>
     <h:form id="pacienteForm">
         <p:growl id="growl" showDetail="true" sticky="false" life="3000" />
+        
+    <!-- Títulos Página -->
         <div class="contenedor_titulo">
             <div class="titulo_principal">
                 <h2>Registro de Paciente</h2>
@@ -17,31 +19,54 @@
                 <h3>Gestión de Exámenes Médicos</h3>
             </div>
         </div>
+    <!-- Termina Títulos Página -->
+       
+        <!-- Modales -->
         <h:panelGrid columns="6" style="margin-bottom: 20px;">
-            <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm" />
-            <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm"
-                oncomplete="PF('reporteDialog').show();" />
-            <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm" />
-            <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" />
+            <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm" oncomplete="PF('modal_antecedente_clinico').show();" />
+                <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm" oncomplete="PF('modal_tipo_signo_vital').show();" />
+                <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm" oncomplete="PF('modal_tipo_aparato_sistemas').show();" />
+                <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen_fisico').show();" />
+                <p:commandButton value="Tipo de Examen Laboratorio" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen_laboratorio').show();" />
             <p:commandButton value="Filtro" icon="pi pi-filter" action="#{pacienteUI.filtro}"
                 update="@form:antecedentesTable, @form, @form:growl" />
             <p:commandButton value="Ver Reporte" icon="pi pi-chart-bar" update=":pacienteForm" />
         </h:panelGrid>
-        <p:dialog id="reporteDialog" header="Signos Vitales" widgetVar="reporteDialog" modal="true" width="60%">
-            <iframe id="reporteFrame" width="100%" height="500px" src="pages/Inicio/tipo_signo_vital.xhtml"
-                frameborder="0"></iframe>
-        </p:dialog>
+        
+        
+        <p:dialog id="modal_tipo_signo_vital" header="Signos Vitales" widgetVar="modal_tipo_signo_vital" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_signo_vital.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+
+            <p:dialog id="modal_antecedente_clinico" header="Antecedentes Clínicos" widgetVar="modal_antecedente_clinico" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_antecedente_clinico.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+
+            <p:dialog id="modal_tipo_aparato_sistemas" header="Aparatos Sistemas" widgetVar="modal_tipo_aparato_sistemas" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_aparato_sistemas.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+
+            <p:dialog id="modal_tipo_examen_fisico" header="Tipo de Examen Físico" widgetVar="modal_tipo_examen_fisico" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_examen_fisico.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+
+            <p:dialog id="modal_tipo_examen_laboratorio" header="Tipo de Examen Laboratorio" widgetVar="modal_tipo_examen_laboratorio" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_examen_laboratorio.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+
+            <!-- Terminan Modales -->
+        
         <!-- <h:panelGroup layout="block" styleClass="contenedor_1">-->
         <h:panelGrid columns="6" cellpadding="5">
-            <h:outputLabel for="fecha" value="Fecha:" />
+            <h:outputLabel for="fecha" value="Fecha:" style="font-size: 0.9rem"/>
             <p:calendar id="fecha" value="#{pacienteUI.fecha}" pattern="dd/MM/yyyy" showOn="button" />
-            <h:outputLabel for="empleado" value="Empleado:" />
+            <h:outputLabel for="empleado" value="Empleado:" style="font-size: 0.9rem" />
             <p:selectOneMenu id="empleado" value="#{pacienteUI.selectedEmpleadoCue}">
                 <f:selectItem itemLabel="Seleccione un Empleado" itemValue="" />
                 <f:selectItems value="#{pacienteUI.empleados}" var="empleado" itemValue="#{empleado.cue}"
                     itemLabel="#{empleado.cue} - #{empleado.nombre1} #{empleado.apellido1}" />
             </p:selectOneMenu>
-            <h:outputLabel for="tipoExamen" value="Tipo de Examen:" />
+            <h:outputLabel for="tipoExamen" value="Tipo de Examen:" style="font-size: 0.9rem"/>
             <p:selectOneMenu id="tipoExamen" value="#{pacienteUI.selectedTipoExamenId}">
                 <f:selectItem itemLabel="Seleccione un Tipo de Examen" itemValue="" />
                 <f:selectItems value="#{pacienteUI.tiposExamen}" var="tipoExamen" itemValue="#{tipoExamen.id}"
@@ -49,7 +74,8 @@
             </p:selectOneMenu>
         </h:panelGrid>
 
-
+        <div class="tablasPrincipal">
+            <div class="scrollable-container">
         <p:panel header="Antecedentes Clinicos">
             <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
                 editable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
@@ -132,6 +158,7 @@
                 </p:column>
             </p:dataTable>
         </p:panel>
+        
         <p:panel header="Aparatos/Sistemas">
             <p:dataTable id="aparatosSistemasTable" var="aparatoSistema"
                 value="#{aparatoSistemasUI.aparatoSistemasList}" editable="true" rowKey="#{aparatoSistema.id}"
@@ -212,16 +239,18 @@
                 </p:column>
             </p:dataTable>
         </p:panel>
-        <h2>Conclusiones</h2>
-        <p:panelGrid columns="6" styleClass="grid">
-            <p:outputLabel for="recomendacion" value="Recomendación:" />
+</div>            
+</div>
+        <h2 style="font-size: 1rem">Conclusiones</h2>
+        <h:panelGrid columns="6" styleClass="grid">
+            <h:outputLabel style="font-size: 0.9rem" for="recomendacion" value="Recomendación:" />
             <p:inputTextarea id="recomendacion" value="#{pacienteUI.recomendacion}" rows="3" cols="30" />
-            <p:outputLabel for="apto_laborar" value="Apto para Laborar:" />
+            <h:outputLabel style="font-size: 0.9rem" for="apto_laborar" value="Apto para Laborar:" />
             <p:selectBooleanCheckbox id="apto_laborar" value="#{pacienteUI.aptoLaborar}" />
-            <p:outputLabel for="fecha_vencimiento" value="Fecha de Vencimiento:" />
+            <h:outputLabel style="font-size: 0.9rem" for="fecha_vencimiento" value="Fecha de Vencimiento:" />
             <p:calendar id="fecha_vencimiento" value="#{pacienteUI.fechaVencimiento}" pattern="yyyy-MM-dd"
                 showOn="button" />
-        </p:panelGrid>
+        </h:panelGrid>
 
         <div style="margin-top: 20px;">
             <p:commandButton value="Guardar" action="#{pacienteUI.guardarPaciente}"
@@ -229,6 +258,12 @@
                 icon="pi pi-save" />
         </div>
     </h:form>
+    
+    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:outputLabel value="Cargando..." />
+        </p:dialog>
+    
 </h:body>
 
 </html>
