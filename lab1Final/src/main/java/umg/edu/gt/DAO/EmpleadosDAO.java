@@ -1,12 +1,13 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import umg.edu.gt.DTO.EmpleadosDTO;
 
-public class EmpleadosDAO {
+public class EmpleadosDAO implements Serializable {
 
     public List<EmpleadosDTO> findAllEmpleados() {
         Transaction transaction = null;

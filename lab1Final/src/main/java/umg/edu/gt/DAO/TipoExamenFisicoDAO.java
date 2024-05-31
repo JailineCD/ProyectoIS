@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,7 +15,7 @@ import umg.edu.gt.DTO.TipoExamenFisicoDTO;
  *
  * @author duper
  */
-public class TipoExamenFisicoDAO {
+public class TipoExamenFisicoDAO implements Serializable {
  
     public void insertarTipoExamenFisico(TipoExamenFisicoDTO tipoExamenFisico) {
         Transaction transaction = null;

@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
@@ -14,7 +15,7 @@ import umg.edu.gt.DTO.TipoExamenDTO;
  *
  * @author Luis Velasquez
  */
-public class TipoExamenDAO {
+public class TipoExamenDAO implements Serializable {
     
     
     public List<TipoExamenDTO> findAllTipoExamen() {

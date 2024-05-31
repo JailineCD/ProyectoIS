@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
@@ -15,7 +16,7 @@ import umg.edu.gt.DTO.TipoAparatoSistemasDTO;
  *
  * @author Douglas
  */
-public class TipoAparatoSistemasDAO {
+public class TipoAparatoSistemasDAO implements Serializable {
     
     public void insertarTipoAparatoSistemas(TipoAparatoSistemasDTO tipoAparatoSistemas) throws Exception {
         Transaction transaction = null;

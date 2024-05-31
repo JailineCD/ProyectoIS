@@ -151,8 +151,7 @@ public class PacienteUI implements Serializable {
     private List<EmpleadosDTO> empleados;
     private List<TipoExamenDTO> tiposExamen;
 
-    
-    public void PacienteUI() {
+    public PacienteUI() {
         cargarEmpleados();
         cargarTiposExamen(); 
     }

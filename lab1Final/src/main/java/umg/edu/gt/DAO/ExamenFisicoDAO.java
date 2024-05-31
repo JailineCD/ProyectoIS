@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import umg.edu.gt.DTO.ExamenFisicoDTO;
@@ -13,7 +14,7 @@ import umg.edu.gt.DTO.ExamenFisicoDTO;
  *
  * @author Luis Velasquez
  */
-public class ExamenFisicoDAO {
+public class ExamenFisicoDAO implements Serializable {
     public void guardar(ExamenFisicoDTO examenFisico) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
