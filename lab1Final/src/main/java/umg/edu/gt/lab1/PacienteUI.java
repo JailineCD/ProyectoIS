@@ -14,21 +14,57 @@ import static jdk.internal.joptsimple.internal.Messages.message;
 import org.hibernate.Session;
 import umg.edu.gt.DAO.ConexionDAO;
 import umg.edu.gt.DAO.PacienteDAO;
+import umg.edu.gt.DAO.SignoVitalDAO;
 import umg.edu.gt.DTO.AntecedenteClinicoDTO;
 import umg.edu.gt.DTO.EmpleadosDTO;
 import umg.edu.gt.DTO.PacienteDTO;
+import umg.edu.gt.DTO.SignoVitalDTO;
 import umg.edu.gt.DTO.TipoExamenDTO; 
 
 @ManagedBean(name = "pacienteUI")
 @ViewScoped
 public class PacienteUI implements Serializable {
+
+    /**
+     * @return the aparatoSistemasUI
+     */
+    public AparatoSistemasUI getAparatoSistemasUI() {
+        return aparatoSistemasUI;
+    }
+
+    /**
+     * @param aparatoSistemasUI the aparatoSistemasUI to set
+     */
+    public void setAparatoSistemasUI(AparatoSistemasUI aparatoSistemasUI) {
+        this.aparatoSistemasUI = aparatoSistemasUI;
+    }
+
+    /**
+     * @return the signosVitalesUI
+     */
+    public SignosVitalesUI getSignosVitalesUI() {
+        return signosVitalesUI;
+    }
+
+    /**
+     * @param signosVitalesUI the signosVitalesUI to set
+     */
+    public void setSignosVitalesUI(SignosVitalesUI signosVitalesUI) {
+        this.signosVitalesUI = signosVitalesUI;
+    }
     
     @ManagedProperty("#{antecedentesClinicosUI}")
     private AntecedentesClinicosUI antecedentesClinicosUI; // Inyectamos el bean
-
-    private List<AntecedenteClinicoDTO> antecedentesClinicos;
+     
+    
     private AntecedenteClinicoDTO nuevoAntecedenteClinico;
     
+    
+    @ManagedProperty("#{signosVitalesUI}")
+    private SignosVitalesUI signosVitalesUI; // Inyectamos el bean
+     
+    
+    private SignoVitalDTO nuevoSignoVital;
     // Getter y setter para antecedentesClinicosUI
     public AntecedentesClinicosUI getAntecedentesClinicosUI() {
         return antecedentesClinicosUI;
@@ -37,8 +73,7 @@ public class PacienteUI implements Serializable {
     public void setAntecedentesClinicosUI(AntecedentesClinicosUI antecedentesClinicosUI) {
         this.antecedentesClinicosUI = antecedentesClinicosUI;
     }
-
-    // Otros getters y setters...
+    
     public AntecedenteClinicoDTO getNuevoAntecedenteClinico() {
         return nuevoAntecedenteClinico;
     }
@@ -46,6 +81,8 @@ public class PacienteUI implements Serializable {
     public void setNuevoAntecedenteClinico(AntecedenteClinicoDTO nuevoAntecedenteClinico) {
         this.nuevoAntecedenteClinico = nuevoAntecedenteClinico;
     }
+    @ManagedProperty("#{aparatoSistemasUI}")
+    private AparatoSistemasUI aparatoSistemasUI;
 
     @Override
     public String toString() {
@@ -156,58 +193,64 @@ public class PacienteUI implements Serializable {
     }
     
     public void filtro() {
-        // Verificar si ya existe un registro con la misma fecha, paciente y tipo de examen
-        PacienteDAO pacienteDAO = new PacienteDAO();
-        PacienteDTO paciente = new PacienteDTO();  
-        paciente.setFechaVencimiento(fechaVencimiento);
-        boolean registroExistente = pacienteDAO.existeRegistroExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
-        if (registroExistente) { 
-            Long idPacienteExistente = pacienteDAO.obtenerIdPacienteExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Se encontraron. "+registroExistente);
-            FacesContext.getCurrentInstance().addMessage(null, message); 
-            antecedentesClinicosUI.cargarAntecedenteClinico(idPacienteExistente);  
-    } else {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "No se encontro informacion");
-        FacesContext.getCurrentInstance().addMessage(null, message); 
-    }
-}   
-    public void guardarPaciente() {
+    // Verificar si ya existe un registro con la misma fecha, paciente y tipo de examen
     PacienteDAO pacienteDAO = new PacienteDAO();
-    // Verificar si ya existe un registro con los mismos valores de fecha, paciente y tipo de examen
-    boolean registroExistente = pacienteDAO.existeRegistroExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
+    PacienteDTO pacienteExistente = pacienteDAO.obtenerPacienteExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
     
-    if (registroExistente) {
-        // Obtener el paciente existente
-        PacienteDTO pacienteExistente = pacienteDAO.obtenerPacienteExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
-        
-        // Actualizar los campos del paciente existente con los nuevos valores
-        pacienteExistente.setRecomendacion(getRecomendacion());
-        pacienteExistente.setAptoLaborar(aptoLaborar);
-        pacienteExistente.setFechaVencimiento(fechaVencimiento);
-        
-        // Guardar los cambios en la base de datos
-        pacienteDAO.actualizar(pacienteExistente);
+    if (pacienteExistente != null) {
+        // Se encontró un paciente existente, cargar los campos adicionales
+        setRecomendacion(pacienteExistente.getRecomendacion());
+        setAptoLaborar(pacienteExistente.isAptoLaborar());
+        setFechaVencimiento(pacienteExistente.getFechaVencimiento());
         
         // Cargar los antecedentes clínicos asociados al paciente existente
-        Long generatedId = pacienteExistente.getId();
-        antecedentesClinicosUI.cargarAntecedenteClinico(generatedId); 
+        Long idPacienteExistente = pacienteExistente.getId();
+        antecedentesClinicosUI.cargarAntecedenteClinico(idPacienteExistente);
+        signosVitalesUI.cargarSignosVitales(idPacienteExistente);
+        aparatoSistemasUI.cargarAparatoSistemas(idPacienteExistente);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "Se encontró un registro existente.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     } else {
-        // Si no existe un registro con los mismos valores, guardar un nuevo paciente
-        PacienteDTO pacienteNuevo = new PacienteDTO();
-        pacienteNuevo.setFecha(fecha);
-        pacienteNuevo.setRecomendacion(getRecomendacion());
-        pacienteNuevo.setCue(selectedEmpleadoCue);
-        pacienteNuevo.setAptoLaborar(aptoLaborar);
-        pacienteNuevo.setIdTipoExamen(selectedTipoExamenId);
-        pacienteNuevo.setFechaVencimiento(fechaVencimiento);
-        
-        pacienteDAO.guardar(pacienteNuevo);
-        
-        // Cargar los antecedentes clínicos asociados al nuevo paciente
-        Long generatedId = pacienteNuevo.getId();
-        antecedentesClinicosUI.cargarAntecedenteClinico(generatedId); 
+        // No se encontró un registro existente
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "No se encontró ningún registro existente.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
-}
+
+    public void guardarPaciente() {
+        PacienteDAO pacienteDAO = new PacienteDAO(); 
+        // Verificar si ya existe un registro con los mismos valores de fecha, paciente y tipo de examen
+        boolean registroExistente = pacienteDAO.existeRegistroExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
+        if (registroExistente) {
+            // Obtener el paciente existente
+            PacienteDTO pacienteExistente = pacienteDAO.obtenerPacienteExistente(fecha, selectedEmpleadoCue, selectedTipoExamenId);
+            // Actualizar los campos del paciente existente con los nuevos valores
+            pacienteExistente.setRecomendacion(getRecomendacion());
+            pacienteExistente.setAptoLaborar(aptoLaborar);
+            pacienteExistente.setFechaVencimiento(fechaVencimiento); 
+            pacienteDAO.actualizar(pacienteExistente); 
+            Long generatedId = pacienteExistente.getId();
+            antecedentesClinicosUI.cargarAntecedenteClinico(generatedId);
+            signosVitalesUI.cargarSignosVitales(generatedId);
+            aparatoSistemasUI.cargarAparatoSistemas(generatedId); 
+        } else {
+            // Si no existe un registro con los mismos valores, guardar un nuevo paciente
+            PacienteDTO pacienteNuevo = new PacienteDTO();
+            pacienteNuevo.setFecha(fecha);
+            pacienteNuevo.setRecomendacion(getRecomendacion());
+            pacienteNuevo.setCue(selectedEmpleadoCue);
+            pacienteNuevo.setAptoLaborar(aptoLaborar);
+            pacienteNuevo.setIdTipoExamen(selectedTipoExamenId);
+            pacienteNuevo.setFechaVencimiento(fechaVencimiento);
+
+            pacienteDAO.guardar(pacienteNuevo); 
+            // Cargar los antecedentes clínicos asociados al nuevo paciente
+            Long generatedId = pacienteNuevo.getId();
+            antecedentesClinicosUI.cargarAntecedenteClinico(generatedId); 
+            signosVitalesUI.cargarSignosVitales(generatedId); 
+            aparatoSistemasUI.cargarAparatoSistemas(generatedId); 
+        }
+    }
 
     
 }
