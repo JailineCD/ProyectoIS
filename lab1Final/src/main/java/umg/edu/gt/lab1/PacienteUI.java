@@ -26,6 +26,20 @@ import umg.edu.gt.DTO.TipoExamenDTO;
 public class PacienteUI implements Serializable {
 
     /**
+     * @return the observacionGenerosUI
+     */
+    public ObservacionGenerosUI getObservacionGenerosUI() {
+        return observacionGenerosUI;
+    }
+
+    /**
+     * @param observacionGenerosUI the observacionGenerosUI to set
+     */
+    public void setObservacionGenerosUI(ObservacionGenerosUI observacionGenerosUI) {
+        this.observacionGenerosUI = observacionGenerosUI;
+    }
+
+    /**
      * @return the examenFisicosUI
      */
     public ExamenFisicosUI getExamenFisicosUI() {
@@ -99,7 +113,8 @@ public class PacienteUI implements Serializable {
     private AparatoSistemasUI aparatoSistemasUI;
     @ManagedProperty("#{examenFisicosUI}")
     private ExamenFisicosUI examenFisicosUI;
-
+    @ManagedProperty("#{observacionGenerosUI}")
+    private ObservacionGenerosUI observacionGenerosUI;
     @Override
     public String toString() {
         return "PacienteDTO@" + Integer.toHexString(hashCode());
@@ -225,6 +240,7 @@ public class PacienteUI implements Serializable {
         signosVitalesUI.cargarSignosVitales(idPacienteExistente);
         aparatoSistemasUI.cargarAparatoSistemas(idPacienteExistente);
         examenFisicosUI.cargarExamenFisico(idPacienteExistente);
+        observacionGenerosUI.cargarObservacionGeneros(idPacienteExistente);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "Se encontró un registro existente.");
         FacesContext.getCurrentInstance().addMessage(null, message);
     } else {
@@ -251,6 +267,7 @@ public class PacienteUI implements Serializable {
             signosVitalesUI.cargarSignosVitales(generatedId);
             aparatoSistemasUI.cargarAparatoSistemas(generatedId);
             examenFisicosUI.cargarExamenFisico(generatedId);
+            observacionGenerosUI.cargarObservacionGeneros(generatedId);
         } else {
             // Si no existe un registro con los mismos valores, guardar un nuevo paciente
             PacienteDTO pacienteNuevo = new PacienteDTO();
@@ -268,6 +285,7 @@ public class PacienteUI implements Serializable {
             signosVitalesUI.cargarSignosVitales(generatedId); 
             aparatoSistemasUI.cargarAparatoSistemas(generatedId);
             examenFisicosUI.cargarExamenFisico(generatedId);
+            observacionGenerosUI.cargarObservacionGeneros(generatedId);
         }
     }
 

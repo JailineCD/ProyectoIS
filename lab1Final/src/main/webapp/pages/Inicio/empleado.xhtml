@@ -82,7 +82,7 @@
                 <p:panel header="Antecedentes Clinicos" class="panel-header">
                     <div class="panel-body">
                         <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
-                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
+                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" scrollable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
                             <p:column headerText="Antecedente">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -258,6 +258,52 @@
                     </div>
                 </p:panel>
             </div>
+            <!-- Aparatos/Sistemas -->
+            <div class="grid-item">
+                <p:panel header="Observaciones por Genero" class="panel-header">
+                    <div class="panel-body">
+                        <p:dataTable id="observacionesGeneroTable" var="observacionGenero"
+                                     value="#{observacionGenerosUI.observacionGeneros}" editable="true" 
+                                     rowKey="#{observacionGenero.id}"
+                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell" widgetVar="cellProducts">
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{observacionGenero.idObservacion.descripcion}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{observacionGenero.idObservacion.descripcion}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Respuesta">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{observacionGenero.respuesta}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{observacionGenero.respuesta}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{observacionGenero.observaciones}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{observacionGenero.observaciones}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Guardar" action="#{observacionGenerosUI.guardarObservacionGeneros()}"
+                                                 icon="pi pi-save" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </p:panel>
+            </div> 
         </div>
     </div>
 </div>
@@ -275,7 +321,7 @@
 
         <div style="margin-top: 20px;">
             <p:commandButton value="Guardar" action="#{pacienteUI.guardarPaciente()}"
-                update="@form:antecedentesTable, @form:signosVitalesTable, @form:aparatosSistemasTable @form:growl"
+                update="@form:antecedentesTable, @form:signosVitalesTable, @form:aparatosSistemasTable, @form:aparatosExamenesTable, @form:observacionesGeneroTable @form:growl"
                 icon="pi pi-save" />
         </div>
     </h:form>
