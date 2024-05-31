@@ -1,5 +1,6 @@
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\ExamenFisicoDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\CentroCostoDTO.java
+C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\lab1\ObservacionGenerosUI.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\AparatoSistemasDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\TipoExamenDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\TipoExamenLaboratorioDTO.java
@@ -17,17 +18,20 @@ C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\ConexionDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\lab1\AntecedentesClinicosUI.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\TipoAntecedenteClinicoDAO.java
+C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\TipoObservacionGeneroDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\TipoSignoVitalDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\lab1\TipoAntecedenteClinicoUI.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\ExamenFisicoDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\TipoAntecedenteClinicoDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\TipoExamenFisicoDAO.java
+C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\ObservacionGeneroDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\TipoExamenFisicoDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\EmpleadosDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\lab1\SignosVitalesUI.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\ExamenLaboratorioDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\TipoAparatoSistemasDAO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DAO\AntecedenteClinicoDAO.java
+C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\ObservacionGeneroDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\AparatoSistemasDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\DTO\EmpleadosDTO.java
 C:\Users\Douglas\Documents\GitHub\ProyectoIS\lab1Final\src\main\java\umg\edu\gt\lab1\TipoExamenLaboratorioUI.java

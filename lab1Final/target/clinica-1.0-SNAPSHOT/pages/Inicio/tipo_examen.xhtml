@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Tipo Examen Laboratorio</title>
+    <title>Tipo Examen</title>
     <h:outputStylesheet library="css" name="default.css" />
         <h:outputStylesheet library="css" name="theme.css" />
 </h:head>
@@ -17,16 +17,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"  /> <!-- Desaparece después de 5 segundos -->
     
     <h:form id="formInsert">
-    <p:panel header="Insertar Tipo de Examen Laboratorio">    
+    <p:panel header="Insertar Tipo de Examen">    
         
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="clave" value="Clave:" />
-            <h:inputText id="clave" value="#{bkn_TipoExamenLaboratorio.tipoExamenLaboratorio.clave}" required="true" />
+            <h:inputText id="clave" value="#{inicioTipoExamen.tipoExamen.clave}" required="true" />
 
             <p:outputLabel for="descripcion" value="Descripción:" />
-            <h:inputText id="descripcion" value="#{bkn_TipoExamenLaboratorio.tipoExamenLaboratorio.descripcion}" required="true" />
+            <h:inputText id="descripcion" value="#{inicioTipoExamen.tipoExamen.descripcion}" required="true" />
             
-            <p:commandButton value="Guardar" action="#{bkn_TipoExamenLaboratorio.guardarTipoExamenLaboratorio}" icon="pi pi-save" update=":formInsert :formTable :messages"/>
+            <p:commandButton value="Guardar" action="#{inicioTipoExamen.guardarTipoExamen()}" icon="pi pi-save" update=":formInsert :formTable :messages"/>
         </h:panelGrid>
         </p:panel>
         
@@ -34,10 +34,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     
         <h:form id="formTable">
         <h:panelGrid columns="1" cellpadding="5">
-            <p:dataTable var="examen" value="#{bkn_TipoExamenLaboratorio.listaExamenes}" editable="true"
+            <p:dataTable var="examen" value="#{inicioTipoExamen.listaTipoExamen}" editable="true"
                          paginator="true" rows="8" paginatorPosition="both">
-                <p:ajax event="rowEdit" listener="#{bkn_TipoExamenLaboratorio.onRowEdit}" update=" messages"/>
-        <p:ajax event="rowEditCancel" listener="#{bkn_TipoExamenLaboratorio.onRowCancel}" update=" messages"/>
+                <p:ajax event="rowEdit" listener="#{inicioTipoExamen.onRowEdit}" update=" messages"/>
+        <p:ajax event="rowEditCancel" listener="#{inicioTipoExamen.onRowCancel}" update=" messages"/>
     <p:column headerText="Clave">
         <p:cellEditor>
             <f:facet name="output">

@@ -466,11 +466,11 @@ body .ui-growl .ui-growl-item-container.ui-growl-info {
 
 /*Padding entre los elementos de la tablas*/
 body .ui-datatable .ui-datatable-data>tr>td {
-    padding: 0.2px;
+    padding: 0.3px;
 }
 
 body .ui-datatable thead th {
-    padding: 0.05rem 0.05rem;
+    padding: 0.07rem 0.07rem;
 }
 
 
@@ -480,7 +480,7 @@ body .ui-datatable thead th {
 
 /*Configurar el scroll de la tabla*/
 .scrollable-container {
-    height: 55vh; /* Ajusta esta altura según tus necesidades */
+    height: 60vh; /* Ajusta esta altura según tus necesidades */
     overflow-y: auto;
     border: 2px solid #ccc; /* Opcional: agregar un borde para visualizar mejor el contenedor */
     border-radius: 10px;
@@ -499,7 +499,7 @@ body .ui-datatable thead th {
 .grid-item {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    
 }
 
 .panel-header {
@@ -521,5 +521,13 @@ body .ui-chkbox .ui-chkbox-box.ui-state-focus {
 }
 
 body .ui-panel .ui-panel-titlebar {
+    padding: 0.2rem;
+}
+
+body .ui-datatable .ui-paginator.ui-paginator-bottom {
+    border-width: 0;
+}
+
+body .ui-datatable .ui-paginator {
     padding: 0.2rem;
 }

@@ -5,6 +5,7 @@
 package umg.edu.gt.DAO;
 
 import Util.HibernateUtil;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,6 +15,8 @@ import umg.edu.gt.DTO.TipoExamenDTO;
  * @author Luis Velasquez
  */
 public class TipoExamenDAO {
+    
+    
     public List<TipoExamenDTO> findAllTipoExamen() {
         Transaction transaction = null;
         List<TipoExamenDTO> TipoExamen = null;
@@ -30,4 +33,51 @@ public class TipoExamenDAO {
         }
         return TipoExamen;
     }
+    
+    
+    public void insertarTipoExamen(TipoExamenDTO tipoExamen) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            tipoExamen.setEstado("ACTIVO"); 
+            session.save(tipoExamen);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new RuntimeException("Error al insertar el tipo de examen de laboratorio", e);
+        }
+    }
+    
+    public void actualizarTipoExamen(TipoExamenDTO tipoExamen) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(tipoExamen);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+    
+    public void eliminarTipoExamen(TipoExamenDTO tipoExamen) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            tipoExamen.setEstado("INACTIVO");
+            session.update(tipoExamen);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+    
 }

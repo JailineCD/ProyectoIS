@@ -10,11 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import static jdk.internal.joptsimple.internal.Messages.message;
 import org.hibernate.Session;
 import umg.edu.gt.DAO.ConexionDAO;
 import umg.edu.gt.DAO.PacienteDAO;
-import umg.edu.gt.DAO.SignoVitalDAO;
 import umg.edu.gt.DTO.AntecedenteClinicoDTO;
 import umg.edu.gt.DTO.EmpleadosDTO;
 import umg.edu.gt.DTO.PacienteDTO;
@@ -153,7 +151,8 @@ public class PacienteUI implements Serializable {
     private List<EmpleadosDTO> empleados;
     private List<TipoExamenDTO> tiposExamen;
 
-    public PacienteUI() {
+    
+    public void PacienteUI() {
         cargarEmpleados();
         cargarTiposExamen(); 
     }

@@ -26,8 +26,8 @@
             <p:commandButton value="Antecedente Clínico" icon="pi pi-info-circle" update=":pacienteForm" oncomplete="PF('modal_antecedente_clinico').show();" />
                 <p:commandButton value="Signos Vitales" icon="pi pi-heart" update=":pacienteForm" oncomplete="PF('modal_tipo_signo_vital').show();" />
                 <p:commandButton value="Aparatos Sistemas" icon="pi pi-cog" update=":pacienteForm" oncomplete="PF('modal_tipo_aparato_sistemas').show();" />
+                <p:commandButton value="Tipo de Examen" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen').show();" />
                 <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen_fisico').show();" />
-                <p:commandButton value="Tipo de Examen Laboratorio" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen_laboratorio').show();" />
             <p:commandButton value="Filtro" icon="pi pi-filter" action="#{pacienteUI.filtro}"
                 update="@form:antecedentesTable, @form, @form:growl" />
             <p:commandButton value="Ver Reporte" icon="pi pi-chart-bar" update=":pacienteForm" />
@@ -46,12 +46,12 @@
                 <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_aparato_sistemas.xhtml" frameborder="0"></iframe>
             </p:dialog>
 
+        <p:dialog id="modal_tipo_examen" header="Tipo de Examen" widgetVar="modal_tipo_examen" modal="true" width="40%" blockScroll="true" draggable="false">
+                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_examen.xhtml" frameborder="0"></iframe>
+            </p:dialog>
+        
             <p:dialog id="modal_tipo_examen_fisico" header="Tipo de Examen Físico" widgetVar="modal_tipo_examen_fisico" modal="true" width="40%" blockScroll="true" draggable="false">
                 <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_examen_fisico.xhtml" frameborder="0"></iframe>
-            </p:dialog>
-
-            <p:dialog id="modal_tipo_examen_laboratorio" header="Tipo de Examen Laboratorio" widgetVar="modal_tipo_examen_laboratorio" modal="true" width="40%" blockScroll="true" draggable="false">
-                <iframe id="reporteFrame" width="100%" height="700px" src="pages/Inicio/tipo_examen_laboratorio.xhtml" frameborder="0"></iframe>
             </p:dialog>
 
             <!-- Terminan Modales -->
@@ -309,7 +309,7 @@
 </div>
 
         <h2 style="font-size: 1rem">Conclusiones</h2>
-        <h:panelGrid columns="6" styleClass="grid">
+        <h:panelGrid columns="8" styleClass="grid">
             <h:outputLabel style="font-size: 0.9rem" for="recomendacion" value="Recomendación:" />
             <p:inputTextarea id="recomendacion" value="#{pacienteUI.recomendacion}" rows="3" cols="30" />
             <h:outputLabel style="font-size: 0.9rem" for="apto_laborar" value="Apto para Laborar:" />
@@ -317,13 +317,16 @@
             <h:outputLabel style="font-size: 0.9rem" for="fecha_vencimiento" value="Fecha de Vencimiento:" />
             <p:calendar id="fecha_vencimiento" value="#{pacienteUI.fechaVencimiento}" pattern="yyyy-MM-dd"
                 showOn="button" />
-        </h:panelGrid>
-
-        <div style="margin-top: 20px;">
+        
+        <div style="margin-left: 20px;">
             <p:commandButton value="Guardar" action="#{pacienteUI.guardarPaciente()}"
                 update="@form:antecedentesTable, @form:signosVitalesTable, @form:aparatosSistemasTable, @form:aparatosExamenesTable, @form:observacionesGeneroTable @form:growl"
                 icon="pi pi-save" />
         </div>
+        
+        </h:panelGrid>
+
+        
     </h:form>
     
     <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />

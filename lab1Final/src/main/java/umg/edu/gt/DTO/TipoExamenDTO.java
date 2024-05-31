@@ -1,4 +1,4 @@
-  /*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -26,7 +26,10 @@ public class TipoExamenDTO implements Serializable {
     
     @Column(name = "descripcion")
     private String descripcion;
-
+    
+    @Column(name = "estado")
+    private String estado = "ACTIVO";
+    
     /**
      * @return the id
      */
@@ -67,6 +70,20 @@ public class TipoExamenDTO implements Serializable {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

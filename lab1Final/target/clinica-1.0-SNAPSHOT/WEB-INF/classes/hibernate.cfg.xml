@@ -22,7 +22,8 @@
         <mapping class="umg.edu.gt.DTO.TipoExamenFisicoDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoExamenLaboratorioDTO"/>
         <mapping class="umg.edu.gt.DTO.TipoSignoVitalDTO"/>
-        
+        <mapping class="umg.edu.gt.DTO.TipoObservacionGeneroDTO"/>
+        <mapping class="umg.edu.gt.DTO.ObservacionGeneroDTO"/>
         
         
         
