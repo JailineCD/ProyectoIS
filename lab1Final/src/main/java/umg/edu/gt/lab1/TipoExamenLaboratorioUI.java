@@ -4,6 +4,7 @@
  */
 package umg.edu.gt.lab1;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -20,7 +21,7 @@ import umg.edu.gt.DTO.TipoExamenLaboratorioDTO;
  */
 @ManagedBean(name = "bkn_TipoExamenLaboratorio")
 @ViewScoped
-public class TipoExamenLaboratorioUI {
+public class TipoExamenLaboratorioUI implements Serializable {
 
     /**
      * @return the estadoActual

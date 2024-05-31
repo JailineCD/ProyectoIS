@@ -487,6 +487,30 @@ body .ui-datatable thead th {
     padding: 10px; /* Opcional: agregar un padding para mejor apariencia */
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    grid-template-rows: 1fr 1fr; /* Dos filas de igual tamaño */
+    gap: 10px; /* Espacio entre las tablas */
+    height: 100%;
+    width: 100%;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-header {
+    flex: 0 0 auto;
+}
+
+.panel-body {
+    flex: 1 1 auto;
+    overflow: auto;
+}
+
 body .ui-chkbox .ui-chkbox-box.ui-state-active {
     color: green;
     border: 2px solid green;

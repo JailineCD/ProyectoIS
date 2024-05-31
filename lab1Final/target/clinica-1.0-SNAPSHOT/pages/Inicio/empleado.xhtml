@@ -74,173 +74,194 @@
             </p:selectOneMenu>
         </h:panelGrid>
 
-        <div class="tablasPrincipal">
-            <div class="scrollable-container">
-        <p:panel header="Antecedentes Clinicos">
-            <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
-                editable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
-                <p:column headerText="Antecedente">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{antecedente.idAntecedenteClinico.descripcion}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{antecedente.idAntecedenteClinico.descripcion}" readonly="true" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Respuesta">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{antecedente.respuesta}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:selectOneMenu value="#{antecedente.respuesta}">
-                                <f:selectItem itemLabel="No" itemValue="No" />
-                                <f:selectItem itemLabel="Si" itemValue="Si" />
-                            </p:selectOneMenu>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-
-                <p:column headerText="Observaciones">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{antecedente.observaciones}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{antecedente.observaciones}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Acciones">
-                    <p:commandButton value="Guardar" action="#{antecedentesClinicosUI.guardarAntecedentesClinicos}"
-                        icon="pi pi-save" />
-                </p:column>
-            </p:dataTable>
-        </p:panel>
-        <p:panel header="Signos Vitales">
-            <p:dataTable id="signosVitalesTable" var="signoVital" value="#{signosVitalesUI.signosVitales}"
-                editable="true" rowKey="#{signoVital.id}" selectionMode="single" editMode="cell">
-                <p:column headerText="Signo Vital">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{signoVital.idTipoSignoVital.descripcion}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{signoVital.idTipoSignoVital.descripcion}" readonly="true" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Respuesta">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{signoVital.respuesta}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{signoVital.respuesta}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Observaciones">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{signoVital.observaciones}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{signoVital.observaciones}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Acciones">
-                    <p:commandButton value="Guardar" action="#{signosVitalesUI.guardarSignosVitales}"
-                        icon="pi pi-save" />
-                </p:column>
-            </p:dataTable>
-        </p:panel>
-        
-        <p:panel header="Aparatos/Sistemas">
-            <p:dataTable id="aparatosSistemasTable" var="aparatoSistema"
-                value="#{aparatoSistemasUI.aparatoSistemasList}" editable="true" rowKey="#{aparatoSistema.id}"
-                selectionMode="single" editMode="cell" widgetVar="cellProducts">
-                <p:column headerText="Aparato/Sistema">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{aparatoSistema.idAparatoSistema.descripcion}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{aparatoSistema.idAparatoSistema.descripcion}" readonly="true" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Respuesta">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{aparatoSistema.respuesta}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{aparatoSistema.respuesta}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Observaciones">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{aparatoSistema.observaciones}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{aparatoSistema.observaciones}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Acciones">
-                    <p:commandButton value="Guardar" action="#{aparatoSistemasUI.guardarAparatoSistemas}"
-                        icon="pi pi-save" />
-                </p:column>
-            </p:dataTable>
-        </p:panel>
-        <p:panel header="Examenes Fisicos">
-            <p:dataTable id="aparatosExamenesTable" var="examenFisico"
-                value="#{examenFisicosUI.examenFisicos}" editable="true" rowKey="#{examenFisico.id}"
-                selectionMode="single" editMode="cell" widgetVar="cellProducts">
-                <p:column headerText="Examenes Fisicos">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{examenFisico.id_examen_fisico.descripcion}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{examenFisico.id_examen_fisico.descripcion}" readonly="true" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Respuesta">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{examenFisico.respuesta}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{examenFisico.respuesta}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Observaciones">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{examenFisico.observaciones}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{examenFisico.observaciones}" />
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Acciones">
-                    <p:commandButton value="Guardar" action="#{examenFisicosUI.guardarExamenFisicos}"
-                        icon="pi pi-save" />
-                </p:column>
-            </p:dataTable>
-        </p:panel>
-</div>            
+<div class="tablasPrincipal">
+    <div class="scrollable-container">
+        <div class="grid-container">
+            <!-- Antecedentes Clinicos -->
+            <div class="grid-item">
+                <p:panel header="Antecedentes Clinicos" class="panel-header">
+                    <div class="panel-body">
+                        <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
+                                     editable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
+                            <p:column headerText="Antecedente">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{antecedente.idAntecedenteClinico.descripcion}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{antecedente.idAntecedenteClinico.descripcion}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Respuesta">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{antecedente.respuesta}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu value="#{antecedente.respuesta}">
+                                            <f:selectItem itemLabel="No" itemValue="No" />
+                                            <f:selectItem itemLabel="Si" itemValue="Si" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{antecedente.observaciones}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{antecedente.observaciones}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Guardar" action="#{antecedentesClinicosUI.guardarAntecedentesClinicos}"
+                                                 icon="pi pi-save" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </p:panel>
+            </div>
+            <!-- Signos Vitales -->
+            <div class="grid-item">
+                <p:panel header="Signos Vitales" class="panel-header">
+                    <div class="panel-body">
+                        <p:dataTable id="signosVitalesTable" var="signoVital" value="#{signosVitalesUI.signosVitales}"
+                                     editable="true" rowKey="#{signoVital.id}" selectionMode="single" editMode="cell">
+                            <p:column headerText="Signo Vital">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{signoVital.idTipoSignoVital.descripcion}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{signoVital.idTipoSignoVital.descripcion}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Respuesta">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{signoVital.respuesta}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{signoVital.respuesta}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{signoVital.observaciones}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{signoVital.observaciones}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Guardar" action="#{signosVitalesUI.guardarSignosVitales}"
+                                                 icon="pi pi-save" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </p:panel>
+            </div>
+            <!-- Aparatos/Sistemas -->
+            <div class="grid-item">
+                <p:panel header="Aparatos/Sistemas" class="panel-header">
+                    <div class="panel-body">
+                        <p:dataTable id="aparatosSistemasTable" var="aparatoSistema"
+                                     value="#{aparatoSistemasUI.aparatoSistemasList}" editable="true" rowKey="#{aparatoSistema.id}"
+                                     selectionMode="single" editMode="cell" widgetVar="cellProducts">
+                            <p:column headerText="Aparato/Sistema">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{aparatoSistema.idAparatoSistema.descripcion}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{aparatoSistema.idAparatoSistema.descripcion}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Respuesta">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{aparatoSistema.respuesta}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{aparatoSistema.respuesta}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{aparatoSistema.observaciones}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{aparatoSistema.observaciones}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Guardar" action="#{aparatoSistemasUI.guardarAparatoSistemas}"
+                                                 icon="pi pi-save" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </p:panel>
+            </div>
+            <!-- Examenes Fisicos -->
+            <div class="grid-item">
+                <p:panel header="Examenes Fisicos" class="panel-header">
+                    <div class="panel-body">
+                        <p:dataTable id="aparatosExamenesTable" var="examenFisico"
+                                     value="#{examenFisicosUI.examenFisicos}" editable="true" rowKey="#{examenFisico.id}"
+                                     selectionMode="single" editMode="cell" widgetVar="cellProducts">
+                            <p:column headerText="Examenes Fisicos">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{examenFisico.id_examen_fisico.descripcion}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{examenFisico.id_examen_fisico.descripcion}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Respuesta">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{examenFisico.respuesta}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{examenFisico.respuesta}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Observaciones">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{examenFisico.observaciones}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{examenFisico.observaciones}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Guardar" action="#{examenFisicosUI.guardarExamenFisicos}"
+                                                 icon="pi pi-save" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </p:panel>
+            </div>
+        </div>
+    </div>
 </div>
+
         <h2 style="font-size: 1rem">Conclusiones</h2>
         <h:panelGrid columns="6" styleClass="grid">
             <h:outputLabel style="font-size: 0.9rem" for="recomendacion" value="Recomendación:" />
