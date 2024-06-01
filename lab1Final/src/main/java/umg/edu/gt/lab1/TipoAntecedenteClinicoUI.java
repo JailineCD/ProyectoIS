@@ -57,12 +57,12 @@ public class TipoAntecedenteClinicoUI implements Serializable {
             if (tipoAntecedenteClinico.getClave() == null || tipoAntecedenteClinico.getClave().isEmpty() ||
                 tipoAntecedenteClinico.getDescripcion() == null || tipoAntecedenteClinico.getDescripcion().isEmpty()) {
                 System.out.println("Error clave y descripcion son obligatorios");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Clave y descripción son obligatorios.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Clave y descripción son obligatorios");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 tipoAntecedenteClinicoDAO.insertarTipoAntecedenteClinico(tipoAntecedenteClinico);
                 actualizarListaTipoAntecedentesClinicos();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "El Tipo de Antecedente Clínico se ha sido insertado correctamente.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha sido insertado correctamente");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 System.out.println("Insertado correctamente");
                 tipoAntecedenteClinico = new TipoAntecedenteClinicoDTO(); // Resetear el formulario

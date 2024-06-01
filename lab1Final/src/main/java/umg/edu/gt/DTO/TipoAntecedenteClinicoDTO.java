@@ -28,7 +28,7 @@ public class TipoAntecedenteClinicoDTO implements Serializable {
     private String descripcion;
     
     @Column(name = "estado")
-    private String estado = "Activo";
+    private String estado = "ACTIVO";
 
     /**
      * @return the id

@@ -58,17 +58,17 @@ public class TipoSignoVitalUI implements Serializable {
         if (tipoSignoVital.getClave() == null || tipoSignoVital.getClave().isEmpty() 
                 || tipoSignoVital.getDescripcion() == null || tipoSignoVital.getDescripcion().isEmpty()) {
             System.out.println("Error. Clave y descripción no deben estar vacios");
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "La clave y descripción no deben estar vacios.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Clave y descripción son obligatorios");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             tipoSignoVitalDAO.insertarTipoSignoVital(tipoSignoVital);
+            System.out.println("Insertado correctamente");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, message);
             actualizarListaSignosVitales();
             this.clave = "";
             this.descripcion = "";
             this.tipoSignoVital = new TipoSignoVitalDTO();
-            //System.out.println("el tipo signo vital ha insertado correctamente");
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "El Tipo de Signo Vital ha sido insertado correctamente.");
-        FacesContext.getCurrentInstance().addMessage(null, message);
             // Actualizar la lista de tipos de signo vital si es necesario
         }
     } catch (Exception e) {

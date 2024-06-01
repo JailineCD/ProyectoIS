@@ -41,7 +41,7 @@ public class TipoSignoVitalDTO implements Serializable {
     private LocalDateTime update_time;
     
     @Column(name = "estado")
-    private String estado = "Activo";
+    private String estado = "ACTIVO";
     
 
     @PrePersist

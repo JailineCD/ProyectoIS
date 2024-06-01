@@ -57,10 +57,14 @@ public class TipoAparatoSistemasUI implements Serializable {
             if (tipoAparatoSistemas.getClave() == null || tipoAparatoSistemas.getClave().isEmpty() ||
                 tipoAparatoSistemas.getDescripcion() == null || tipoAparatoSistemas.getDescripcion().isEmpty()) {
                 System.out.println("Error: clave y descripcion son obligatorios");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Clave y descripción son obligatorios");
+                FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 tipoAparatoSistemasDAO.insertarTipoAparatoSistemas(tipoAparatoSistemas);
                 actualizarListaAparatos();
                 System.out.println("Insertado correctamente");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
                 this.clave = "";
                 this.descripcion = "";
                 tipoAparatoSistemas = new TipoAparatoSistemasDTO(); // Resetear el formulario

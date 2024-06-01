@@ -13,16 +13,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <h:outputStylesheet library="css" name="theme.css" />
     </h:head>
 
-    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="2000"   /> <!-- Desaparece después de 5 segundos -->
+    <p:growl id="messages" globalOnly="true" showDetail="true" showSummary="true" life="1000"   /> <!-- Desaparece después de 5 segundos -->
     
     <h:form id="insertForm">
         <p:panel header="Insertar Tipos de Signos Vitales">
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="clave" value="Clave:" />
-            <h:inputText id="clave" value="#{bkn_TipoSignoVital.tipoSignoVital.clave}" required="true" />
+            <h:inputText id="clave" value="#{bkn_TipoSignoVital.tipoSignoVital.clave}"  />
             
             <p:outputLabel for="descripcion" value="Descripción:" />
-            <h:inputText id="descripcion" value="#{bkn_TipoSignoVital.tipoSignoVital.descripcion}" required="true" />
+            <h:inputText id="descripcion" value="#{bkn_TipoSignoVital.tipoSignoVital.descripcion}"  />
             
         </h:panelGrid>
             <p:commandButton value="Guardar" action="#{bkn_TipoSignoVital.guardarTipoSignoVital()}"  icon="pi pi-save" update=":insertForm :formTable messages" />
@@ -32,7 +32,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <h:form id="formTable">
     <h:panelGrid columns="1" cellpadding="5">
         <p:dataTable var="signoVital" value="#{bkn_TipoSignoVital.listaSignosVitales}" editable="true"
-                     paginator="true" rows="8" paginatorPosition="both">
+                     paginator="true" rows="9" paginatorPosition="both">
             <p:ajax event="rowEdit" listener="#{bkn_TipoSignoVital.guardarCambios(signoVital)}" update="messages"/>
             <p:ajax event="rowEditCancel" listener="#{bkn_TipoSignoVital.onRowCancel}" update="messages"/>
             <p:column headerText="Clave">
@@ -62,8 +62,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     </f:facet>
                     <f:facet name="input">
                         <p:selectOneMenu value="#{signoVital.estado}" style="width:100%">
-                            <f:selectItem itemValue="Activo" itemLabel="Activo" />
-                            <f:selectItem itemValue="Inactivo" itemLabel="Inactivo" />
+                            <f:selectItem itemValue="ACTIVO" itemLabel="ACTIVO" />
+                            <f:selectItem itemValue="INACTIVO" itemLabel="INACTIVO" />
                         </p:selectOneMenu>
                     </f:facet>
                 </p:cellEditor>

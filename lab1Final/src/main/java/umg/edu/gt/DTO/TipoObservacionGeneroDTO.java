@@ -41,7 +41,7 @@ public class TipoObservacionGeneroDTO implements Serializable {
     private LocalDateTime update_time;
     
     @Column(name = "estado")
-    private String estado = "Activo";  // Default value
+    private String estado = "ACTIVO";  // Default value
 
     @PrePersist
     @PreUpdate

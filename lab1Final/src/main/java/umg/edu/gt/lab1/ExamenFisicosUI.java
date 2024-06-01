@@ -33,6 +33,7 @@ public class ExamenFisicosUI implements Serializable {
     private String usuario;
     private String observaciones;
     private String respuesta;
+    
     public ExamenFisicosUI() {
         cargarTiposExamenFisico(); 
     }

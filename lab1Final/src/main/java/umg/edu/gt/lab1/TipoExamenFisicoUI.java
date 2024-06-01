@@ -57,10 +57,14 @@ public class TipoExamenFisicoUI implements Serializable {
             if (tipoExamenFisico.getClave() == null || tipoExamenFisico.getClave().isEmpty() ||
                 tipoExamenFisico.getDescripcion() == null || tipoExamenFisico.getDescripcion().isEmpty()) {
                 System.out.println("Error clave y descripcion son obligatorios");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Clave y descripción son obligatorios");
+                FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 tipoExamenFisicoDAO.insertarTipoExamenFisico(tipoExamenFisico);
                 actualizarListaExamenes();
                 System.out.println("Insertado correctamente");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
                 this.clave = "";
                 this.descripcion = "";
                 tipoExamenFisico = new TipoExamenFisicoDTO(); // Resetear el formulario
@@ -75,7 +79,7 @@ public class TipoExamenFisicoUI implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             tipoExamenFisicoDAO.actualizarTipoExamenFisico(examen);
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cambios guardados correctamente"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Cambios guardados correctamente"));
             actualizarListaExamenes();
         } catch (Exception e) {
             e.printStackTrace();

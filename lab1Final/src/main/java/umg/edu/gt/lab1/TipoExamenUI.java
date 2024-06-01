@@ -81,10 +81,14 @@ public class TipoExamenUI implements Serializable {
             if (getTipoExamen().getClave() == null || getTipoExamen().getClave().isEmpty() ||
                 getTipoExamen().getDescripcion() == null || getTipoExamen().getDescripcion().isEmpty()) {
                 System.out.println("Error: Clave y descripción son obligatorios.");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "Clave y descripción son obligatorios");
+                FacesContext.getCurrentInstance().addMessage(null, message);
             } else {
                 getTipoExamen().setEstado("Activo");
                 tipoExamenDAO.insertarTipoExamen(getTipoExamen());
                 System.out.println("Insertado correctamente");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+                FacesContext.getCurrentInstance().addMessage(null, message);
                 this.setClave("");
                 this.setDescripcion("");
                 setTipoExamen(new TipoExamenDTO()); // Resetear el formulario

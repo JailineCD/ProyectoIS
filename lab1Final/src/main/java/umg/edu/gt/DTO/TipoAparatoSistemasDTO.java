@@ -41,7 +41,7 @@ public class TipoAparatoSistemasDTO implements Serializable {
     }
     
     @Column(name = "estado")
-    private String estado = "Activo";  // Default value
+    private String estado = "ACTIVO";  // Default value
 
     /**
      * @return the id
