@@ -7,8 +7,10 @@ package umg.edu.gt.lab1;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session; 
 import umg.edu.gt.DAO.ConexionDAO;
 import umg.edu.gt.DAO.ObservacionGeneroDAO;
@@ -184,6 +186,8 @@ public class ObservacionGenerosUI implements Serializable {
         ObservacionGeneroDAO observacionGenerosDAO = new ObservacionGeneroDAO();
         for (ObservacionGeneroDTO observacion : observacionGeneros) {
             observacionGenerosDAO.guardar(observacion);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 }

@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import umg.edu.gt.DAO.AparatoSistemasDAO;
 import umg.edu.gt.DAO.ConexionDAO;
@@ -137,6 +139,8 @@ public class AparatoSistemasUI implements Serializable {
         AparatoSistemasDAO aparatoSistemasDAO = new AparatoSistemasDAO();
         for (AparatoSistemasDTO aparatoSistemas : aparatoSistemasList) {
             aparatoSistemasDAO.guardar(aparatoSistemas);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 }

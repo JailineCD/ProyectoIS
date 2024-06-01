@@ -39,7 +39,7 @@
                                   action="#{pacienteUI.openReport}" target="_blank">
                 <h:outputText value="Generar Reporte" />
             </h:commandLink>
-        
+              
         </h:panelGrid>
         
         
@@ -74,7 +74,7 @@
             <!-- Terminan Modales -->
        
         <!-- <h:panelGroup layout="block" styleClass="contenedor_1">-->
-        <h:panelGrid columns="6" cellpadding="5">
+        <h:panelGrid columns="7" cellpadding="5">
             <h:outputLabel for="fecha" value="Fecha:" style="font-size: 0.9rem"/>
             <p:calendar id="fecha" value="#{pacienteUI.fecha}" pattern="dd/MM/yyyy" showOn="button" />
             <h:outputLabel for="empleado" value="Empleado:" style="font-size: 0.9rem" />
@@ -89,6 +89,10 @@
                 <f:selectItems value="#{pacienteUI.tiposExamen}" var="tipoExamen" itemValue="#{tipoExamen.id}"
                     itemLabel="#{tipoExamen.id} - #{tipoExamen.descripcion}" />
             </p:selectOneMenu>
+            
+            <p:commandButton style="margin-left: 20px" value="Insertar" action="#{pacienteUI.guardarPaciente()}"
+                update="@form:antecedentesTable, @form:signosVitalesTable, @form:aparatosSistemasTable, @form:aparatosExamenesTable, @form:observacionesGeneroTable @form:growl"
+                icon="pi pi-save" />
         </h:panelGrid>
 
 <div class="tablasPrincipal">
@@ -134,7 +138,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Guardar" action="#{antecedentesClinicosUI.guardarAntecedentesClinicos}"
+                                <p:commandButton title="Guardar" update="@form:growl" action="#{antecedentesClinicosUI.guardarAntecedentesClinicos}"
                                                  icon="pi pi-save" />
                             </p:column>
                         </p:dataTable>
@@ -178,7 +182,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Guardar" action="#{signosVitalesUI.guardarSignosVitales}"
+                                <p:commandButton title="Guardar" update="@form:growl" action="#{signosVitalesUI.guardarSignosVitales}"
                                                  icon="pi pi-save" />
                             </p:column>
                         </p:dataTable>
@@ -226,7 +230,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Guardar" action="#{aparatoSistemasUI.guardarAparatoSistemas}"
+                                <p:commandButton title="Guardar" update="@form:growl" action="#{aparatoSistemasUI.guardarAparatoSistemas}"
                                                  icon="pi pi-save" />
                             </p:column>
                         </p:dataTable>
@@ -273,7 +277,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Guardar" action="#{examenFisicosUI.guardarExamenFisicos}"
+                                <p:commandButton title="Guardar" update="@form:growl" action="#{examenFisicosUI.guardarExamenFisicos}"
                                                  icon="pi pi-save" />
                             </p:column>
                         </p:dataTable>
@@ -320,7 +324,7 @@
                                 </p:cellEditor>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Guardar" action="#{observacionGenerosUI.guardarObservacionGeneros()}"
+                                <p:commandButton title="Guardar" update="@form:growl" action="#{observacionGenerosUI.guardarObservacionGeneros()}"
                                                  icon="pi pi-save" />
                             </p:column>
                         </p:dataTable>

@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import umg.edu.gt.DAO.ConexionDAO;
 import umg.edu.gt.DAO.ExamenFisicoDAO;
@@ -159,6 +161,8 @@ public class ExamenFisicosUI implements Serializable {
         ExamenFisicoDAO examenFisicoDAO = new ExamenFisicoDAO();
         for (ExamenFisicoDTO antecedente : examenFisicos) {
             examenFisicoDAO.guardar(antecedente);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
         //examenFisicos.clear();
     }
