@@ -26,10 +26,12 @@ public class AparatoSistemasUI implements Serializable {
     private int selectedPacienteId;
     private String usuario;
     private String observaciones;
-    private int respuesta;
+    private String respuesta="Normal";
 
     public AparatoSistemasUI() {
         cargarTiposAparatoSistemas();
+        respuesta="Normal";
+        
     }
 
     public List<AparatoSistemasDTO> getAparatoSistemasList() {
@@ -88,11 +90,11 @@ public class AparatoSistemasUI implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public int getRespuesta() {
+    public String getRespuesta() {
         return respuesta;
     }
 
-    public void setRespuesta(int respuesta) {
+    public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
 

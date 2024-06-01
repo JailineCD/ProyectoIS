@@ -208,7 +208,10 @@
                                         <h:outputText value="#{aparatoSistema.respuesta}" />
                                     </f:facet>
                                     <f:facet name="input">
-                                        <p:inputText value="#{aparatoSistema.respuesta}" />
+                                        <p:selectOneMenu value="#{aparatoSistema.respuesta}">
+                                            <f:selectItem itemLabel="Normal" itemValue="Normal" />
+                                            <f:selectItem itemLabel="No Normal" itemValue="No Normal" />
+                                        </p:selectOneMenu>
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>
@@ -236,7 +239,9 @@
                     <div class="panel-body">
                         <p:dataTable id="aparatosExamenesTable" var="examenFisico"
                                      value="#{examenFisicosUI.examenFisicos}" editable="true" rowKey="#{examenFisico.id}"
-                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell" widgetVar="cellProducts">
+                                     selectionMode="single" paginator="true" 
+                                     rows="3" paginatorPosition="bottom" 
+                                     editMode="cell">
                             <p:column headerText="Examenes Fisicos">
                                 <p:cellEditor>
                                     <f:facet name="output">
@@ -282,7 +287,8 @@
                         <p:dataTable id="observacionesGeneroTable" var="observacionGenero"
                                      value="#{observacionGenerosUI.observacionGeneros}" editable="true" 
                                      rowKey="#{observacionGenero.id}"
-                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell" widgetVar="cellProducts">
+                                     selectionMode="single" paginator="true" rows="3" paginatorPosition="bottom" editMode="cell"
+                                     >
                             <p:column headerText="Observaciones">
                                 <p:cellEditor>
                                     <f:facet name="output">
