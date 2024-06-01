@@ -31,9 +31,13 @@
                 <p:commandButton value="Tipo de Examen Físico" icon="pi pi-file" update=":pacienteForm" oncomplete="PF('modal_tipo_examen_fisico').show();" />
             <p:commandButton value="Filtro" icon="pi pi-filter" action="#{pacienteUI.filtro}"
                 update="@form:antecedentesTable, @form, @form:growl" />
-            <h:commandLink value="Ver Reporte" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" 
-                           action="#{pacienteUI.openReport}" target="_blank">
-                <h:outputText value="Ver Reporte" />
+            <h:commandLink style="padding:0.55rem; 
+                                  background: green; 
+                                  border: none; 
+                                  color:white; 
+                                  font-weight: normal;" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" 
+                                  action="#{pacienteUI.openReport}" target="_blank">
+                <h:outputText value="Generar Reporte" />
             </h:commandLink>
         
         </h:panelGrid>
@@ -56,7 +60,7 @@
             </p:dialog>
         
             <p:dialog id="modal_reporte" header="Ver Reporte" widgetVar="modal_reporte" modal="true" width="80%" height="600px" blockScroll="true" draggable="false" resizable="false">
-            <iframe id="reporteFrame" width="100%" height="100%" src="#{component.clientId}_link" frameborder="0"></iframe>
+                <iframe id="reporteFrame" width="100%" height="100%" src="#{component.clientId}_link" frameborder="0"></iframe>
         </p:dialog>
         
     
@@ -91,7 +95,7 @@
                 <p:panel header="Antecedentes Clinicos" class="panel-header">
                     <div class="panel-body">
                         <p:dataTable id="antecedentesTable" var="antecedente" value="#{antecedentesClinicosUI.antecedentesClinicos}"
-                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" scrollable="true" rowKey="#{antecedente.id}" selectionMode="single" editMode="cell">
+                                     editable="true" paginator="true" rows="3" paginatorPosition="bottom" scrollable="true" rowKey="#{antecedente.id}" selectionMode="single"  editMode="cell">
                             <p:column headerText="Antecedente">
                                 <p:cellEditor>
                                     <f:facet name="output">
