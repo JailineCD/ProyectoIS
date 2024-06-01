@@ -284,6 +284,7 @@ public class PacienteUI implements Serializable {
             observacionGenerosUI.cargarObservacionGeneros(generatedId);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            
         } else {
             // Si no existe un registro con los mismos valores, guardar un nuevo paciente
             PacienteDTO pacienteNuevo = new PacienteDTO();
@@ -305,6 +306,7 @@ public class PacienteUI implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Se ha insertado correctamente");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        
     }
 
     
